@@ -7,18 +7,6 @@
     padding: 1em;
 }
 
-.dialog {
-    color: #fff;
-}
-
-.dialog.active {
-    color: #000;
-}
-
 .messages {
     padding: 1em;
-}
-
-.message {
-
 }
