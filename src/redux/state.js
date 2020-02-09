@@ -1,3 +1,4 @@
+import rerenderAll from "../render";
 
 let state = {
   dialogs: {
@@ -36,11 +37,7 @@ let state = {
       {id: 1, text: 'Ofcourse'}
     ],
     addMessage: {
-      btnText: 'Add Message',
-      handleClick: (elem) => {
-        let text = elem.current.value;
-        alert(text);
-      }
+      btnText: 'Add Message'
     }
   },
   profile: {
@@ -50,11 +47,7 @@ let state = {
       {id: 3, text: 'Thanks', likesCount: 11},
     ],
     addPost: {
-      btnText: 'Add Post',
-      handleClick: (elem) => {
-        let text = elem.current.value;
-        alert(text);
-      }
+      btnText: 'Add Post'
     }
   },
   navBar: {
@@ -76,6 +69,18 @@ let state = {
       }
     ]
   }
+}
+
+export  let addPost = (elem) => {
+  let text = elem.current.value;
+  debugger
+  state.profile.postsData.push({
+    id: 5,
+    text: text,
+    likesCount: 0
+  });
+  elem.current.value = '';
+  rerenderAll(state, addPost);
 }
 
 export  default state

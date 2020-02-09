@@ -24,6 +24,7 @@ const App = (props) => {
                     <Route path='/profile'
                            render={() => <Profile
                              state={props.state.profile}
+                             addPost={props.addPost}
                            />}
                     />
                     <Route path='/news' component={News}/>

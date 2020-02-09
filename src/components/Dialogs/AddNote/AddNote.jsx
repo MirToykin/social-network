@@ -2,15 +2,17 @@ import React from 'react';
 import  classes from './AddNote.module.css'
 
 const AddNote = (props) => {
-  debugger
   let elem = React.createRef();
-  let handleClick = () => props.state.handleClick(elem);
+  let handleClick = (e) => {
+    props.addPost(elem);
+    e.preventDefault();
+  };
 
   return (
     <div>
       <form>
         <div>
-          <textarea ref={elem} className={classes.textField}></textarea>
+          <textarea ref={elem} onChange={props.handleChange} className={classes.textField}></textarea>
         </div>
         <button onClick={handleClick}>{props.state.btnText}</button>
       </form>
