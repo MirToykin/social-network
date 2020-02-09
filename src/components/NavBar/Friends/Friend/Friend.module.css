@@ -1,0 +1,17 @@
+.friend {
+  width: 32%;
+}
+
+.friend p {
+  font-size: 12px;
+  text-align: center;
+}
+
+.ava {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.avaContainer {
+  font-size: 0;
+}

@@ -1,0 +1,8 @@
+.friends {
+  display: flex;
+  justify-content: space-between;
+}
+
+.friendsHeader {
+  margin-bottom: 0.5em;
+}

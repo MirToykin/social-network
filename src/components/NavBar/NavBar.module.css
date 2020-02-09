@@ -12,3 +12,7 @@
 a.active {
   color: gold;
 }
+
+.navItems {
+  margin-bottom: 50px;
+}
