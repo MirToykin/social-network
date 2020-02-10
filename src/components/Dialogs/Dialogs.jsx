@@ -19,7 +19,7 @@ const Dialogs = (props) => {
           {props.state.messagesData.map((message) => <Message text={message.text}/>)}
         </div>
         <div className={classes.addMessage}>
-          <AddNote state={props.state.addMessage}/>
+          {/*<AddNote state={props.state.addMessage}/>*/}
         </div>
       </div>
     </div>

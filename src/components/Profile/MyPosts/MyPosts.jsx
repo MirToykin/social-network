@@ -20,7 +20,7 @@ const MyPosts = (props) => {
         {/*<div>*/}
         {/*  <button onClick={addPost}>Add post</button>*/}
         {/*</div>*/}
-        <AddNote state={props.state.addPost} addPost={props.addPost}/>
+        <AddNote state={props.state} addPost={props.addPost} handlePostValue={props.handlePostValue}/>
       </div>
       <div className={classes.posts}>
         {props.state.postsData.map((post) => <Post message={post.text} likeNum={post.likesCount}/>)}

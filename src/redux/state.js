@@ -34,7 +34,7 @@ let state = {
       {id: 1, text: 'I am fine, what about you?'},
       {id: 1, text: 'Me too'},
       {id: 1, text: 'Good'},
-      {id: 1, text: 'Ofcourse'}
+      {id: 1, text: 'Of course'}
     ],
     addMessage: {
       btnText: 'Add Message'
@@ -48,7 +48,8 @@ let state = {
     ],
     addPost: {
       btnText: 'Add Post'
-    }
+    },
+    postValue: ''
   },
   navBar: {
     friendsData: [
@@ -73,14 +74,18 @@ let state = {
 
 export  let addPost = (elem) => {
   let text = elem.current.value;
-  debugger
   state.profile.postsData.push({
     id: 5,
     text: text,
     likesCount: 0
   });
-  elem.current.value = '';
-  rerenderAll(state, addPost);
+  state.profile.postValue = '';
+  rerenderAll(state, addPost, handlePostValue);
+}
+
+export  let handlePostValue = (elem) => {
+  state.profile.postValue = elem.current.value;
+  rerenderAll(state, addPost, handlePostValue);
 }
 
 export  default state
