@@ -4,10 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function rerenderAll(state, addPost, handlePostValue) {
+function rerenderAll(state, methods) {
   ReactDOM.render(<App state={state}
-                       addPost={addPost}
-                       handlePostValue={handlePostValue}
+                       methods={methods}
   />, document.getElementById('root'));
 }
 

@@ -38,7 +38,8 @@ let state = {
     ],
     addMessage: {
       btnText: 'Add Message'
-    }
+    },
+    messageValue: ''
   },
   profile: {
     postsData: [
@@ -72,20 +73,40 @@ let state = {
   }
 }
 
-export  let addPost = (elem) => {
-  let text = elem.current.value;
+let addPost = () => {
   state.profile.postsData.push({
     id: 5,
-    text: text,
+    text: state.profile.postValue,
     likesCount: 0
   });
   state.profile.postValue = '';
-  rerenderAll(state, addPost, handlePostValue);
+  rerenderAll(state, methods);
 }
 
-export  let handlePostValue = (elem) => {
+let changePostValue = (elem) => {
   state.profile.postValue = elem.current.value;
-  rerenderAll(state, addPost, handlePostValue);
+  rerenderAll(state, methods);
+}
+
+let addMessage = () => {
+  state.dialogs.messagesData.push({
+    id: 6,
+    text: state.dialogs.messageValue,
+  });
+  state.dialogs.messageValue = '';
+  rerenderAll(state, methods);
+}
+
+let changeMessageValue = (elem) => {
+  state.dialogs.messageValue = elem.current.value;
+  rerenderAll(state, methods);
+}
+
+export let methods = {
+  addPost: addPost,
+  changePostValue: changePostValue,
+  addMessage: addMessage,
+  changeMessageValue: changeMessageValue
 }
 
 export  default state

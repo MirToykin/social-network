@@ -4,12 +4,11 @@ import  classes from './AddNote.module.css'
 const AddNote = (props) => {
   let elem = React.createRef();
   let handleClick = (e) => {
-    debugger
-    props.addPost(elem);
+    props.add();
     e.preventDefault();
   };
   let handleChange = (e) => {
-    props.handlePostValue(elem)
+    props.change(elem)
   }
   return (
     <div>
@@ -17,11 +16,11 @@ const AddNote = (props) => {
         <div>
           <textarea ref={elem}
                     className={classes.textField}
-                    value={props.state.postValue}
+                    value={props.noteText}
                     onChange={handleChange}
           />
         </div>
-        <button onClick={handleClick}>{props.state.addPost.btnText}</button>
+        <button onClick={handleClick}>{props.btnText}</button>
       </form>
     </div>
   )

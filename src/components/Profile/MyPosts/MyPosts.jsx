@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
-import AddNote from "../../Dialogs/AddNote/AddNote";
+import AddNote from "../../AddNote/AddNote";
 
 const MyPosts = (props) => {
   // let textAreaElement = React.createRef();
@@ -21,13 +21,14 @@ const MyPosts = (props) => {
         {/*  <button onClick={addPost}>Add post</button>*/}
         {/*</div>*/}
         <AddNote
-          state={props.state}
-          addPost={props.addPost}
-          handlePostValue={props.handlePostValue
-          }/>
+          btnText={props.profile.addPost.btnText}
+          noteText={props.profile.postValue}
+          add={props.methods.addPost}
+          change={props.methods.changePostValue}
+        />
       </div>
       <div className={classes.posts}>
-        {props.state.postsData.map((post) => <Post message={post.text} likeNum={post.likesCount}/>)}
+        {props.profile.postsData.map((post) => <Post message={post.text} likeNum={post.likesCount}/>)}
       </div>
     </div>
   )
