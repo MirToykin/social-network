@@ -10,22 +10,23 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
+  debugger
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <NavBar state={props.state.navBar}/>
+                <NavBar navbar={props.state.navBar}/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
                            render={() => <Dialogs
                              dialogs={props.state.dialogs}
-                             methods={props.methods}
+                             dispatch={props.dispatch}
                            />}
                     />
                     <Route path='/profile'
                            render={() => <Profile
                              profile={props.state.profile}
-                             methods={props.methods}
+                             dispatch={props.dispatch}
                            />}
                     />
                     <Route path='/news' component={News}/>

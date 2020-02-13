@@ -2,6 +2,10 @@ import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from './Post/Post'
 import AddNote from "../../AddNote/AddNote";
+import {
+  addPostActionCreator,
+  changePostValueActionCreator
+} from "../../../redux/profile-reducer";
 
 const MyPosts = (props) => {
   // let textAreaElement = React.createRef();
@@ -14,17 +18,12 @@ const MyPosts = (props) => {
     <div className={classes.myPosts}>
       <h3>my posts</h3>
       <div className={classes.newPost}>
-        {/*<div>*/}
-        {/*  <textarea ref={textAreaElement}></textarea>*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  <button onClick={addPost}>Add post</button>*/}
-        {/*</div>*/}
         <AddNote
           btnText={props.profile.addPost.btnText}
           noteText={props.profile.postValue}
-          add={props.methods.addPost}
-          change={props.methods.changePostValue}
+          dispatch={props.dispatch}
+          addActionCreator={addPostActionCreator}
+          changeValueActionCreator={changePostValueActionCreator}
         />
       </div>
       <div className={classes.posts}>

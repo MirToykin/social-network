@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css'
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import AddNote from "../AddNote/AddNote";
+import {addMessageActionCreator, changeMessageValueActionCreator} from "../../redux/dialogs-reducer";
 
 const Dialogs = (props) => {
   return (
@@ -22,8 +23,9 @@ const Dialogs = (props) => {
           <AddNote
             btnText={props.dialogs.addMessage.btnText}
             noteText={props.dialogs.messageValue}
-            add={props.methods.addMessage}
-            change={props.methods.changeMessageValue}
+            dispatch={props.dispatch}
+            addActionCreator={addMessageActionCreator}
+            changeValueActionCreator={changeMessageValueActionCreator}
           />
         </div>
       </div>

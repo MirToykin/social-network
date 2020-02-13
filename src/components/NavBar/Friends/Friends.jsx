@@ -3,6 +3,7 @@ import classes from './Friends.module.css'
 import Friend from "./Friend/Friend";
 
 const Friends = (props) => {
+  debugger
   return (
     <div>
       <h2 className={classes.friendsHeader}>Friends</h2>
