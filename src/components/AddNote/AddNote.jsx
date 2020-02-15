@@ -2,20 +2,20 @@ import React from 'react';
 import  classes from './AddNote.module.css'
 
 const AddNote = (props) => {
-  // let elem = React.createRef();
+
   let handleClick = (e) => {
-    props.dispatch(props.addActionCreator());
+    props.addNote();
     e.preventDefault();
-  };
+  }
+
   let handleChange = (e) => {
-    props.dispatch(props.changeValueActionCreator(e.target.value))
+    props.changeNoteValue(e.target.value);
   }
   return (
     <div>
       <form>
         <div>
-          <textarea /*ref={elem}*/
-                    className={classes.textField}
+          <textarea className={classes.textField}
                     value={props.noteText}
                     onChange={handleChange}
           />

@@ -6,13 +6,13 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store'
 
 function rerenderAll() {
-  ReactDOM.render(<App state={store.getState()} dispatch={store.dispatch.bind(store)}
+  ReactDOM.render(<App store={store}
   />, document.getElementById('root'));
 }
 
 rerenderAll()
 store.subscribe(() => {
-  rerenderAll(store.getState())
+  rerenderAll(store)
 })
 
 // If you want your app to work offline and load faster, you can change

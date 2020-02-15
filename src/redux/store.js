@@ -8,7 +8,7 @@ let store = {
   },
   _state: {
     dialogs: {
-      dialogsData: [
+      dialogsItems: [
         {
           id: 1,
           avaUrl: 'https://st4.depositphotos.com/27867620/30471/v/450/depositphotos_304718678-stock-illustration-joker-web-icon-simple-illustration.jpg',
@@ -35,7 +35,7 @@ let store = {
           name: 'grendma Lena'
         }
       ],
-      messagesData: [
+      messages: [
         {id: 1, text: 'How are you?'},
         {id: 1, text: 'I am fine, what about you?'},
         {id: 1, text: 'Me too'},

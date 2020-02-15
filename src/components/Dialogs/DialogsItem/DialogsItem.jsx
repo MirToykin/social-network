@@ -7,9 +7,6 @@ const DialogsItem = (props) => {
 
   return (
     <div className={classes.dialog}>
-      {/*<div className={classes.avaContainer}>*/}
-      {/*  <NavLink to={path}><img className={classes.dialogAva} src={props.avaUrl} alt={props.name} /></NavLink>*/}
-      {/*</div>*/}
       <NavLink to={path} activeClassName={classes.active}>
         <img className={classes.dialogAva} src={props.avaUrl} alt={props.name}/>
         <span>{props.name}</span>
