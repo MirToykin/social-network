@@ -2,11 +2,13 @@ import React from "react";
 import classes from "./Users.module.css";
 import User from "./User/User";
 import UsersPagination from "./UsersPagination/UsersPagination";
+import Preloader from "../common/Preloader";
 
 const Users = (props) => {
   return (
     <div className={classes.usersContainer}>
       <div className={classes.usersItemsWrap}>
+        {props.isFetching ? <Preloader/> : null}
         {props.users.map(u => {
           return <User
             id={u.id}
