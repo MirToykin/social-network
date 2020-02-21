@@ -1,0 +1,15 @@
+.pageNumbersContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pageNum {
+  margin-right: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.active {
+  color: #333;
+  font-weight: bold;
+}

@@ -1,0 +1,43 @@
+.userCard {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.userCardLeft {
+  width: 20%;
+  text-align: center;
+}
+
+.avaContainer {
+  width: 80%;
+  margin: auto;
+}
+
+.buttonContainer {
+  width: 80%;
+  margin: auto;
+}
+
+.buttonContainer button {
+  width: 100%;
+}
+
+.avaContainer img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.userCardRight {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid silver;
+  border-radius: 1.5em;
+  padding: 1em;
+}
+
+.name_and_status {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

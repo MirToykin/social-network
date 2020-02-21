@@ -4,16 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store'
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
-function rerenderAll() {
-  ReactDOM.render(<App store={store}
-  />, document.getElementById('root'));
-}
+ReactDOM.render(<BrowserRouter>
+  <Provider store={store}>
+    <App store={store}/>
+  </Provider>
+</BrowserRouter>, document.getElementById('root'));
 
-rerenderAll()
-store.subscribe(() => {
-  rerenderAll(store)
-})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

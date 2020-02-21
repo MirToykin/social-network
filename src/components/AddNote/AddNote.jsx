@@ -4,8 +4,8 @@ import  classes from './AddNote.module.css'
 const AddNote = (props) => {
 
   let handleClick = (e) => {
-    props.addNote();
     e.preventDefault();
+    props.addNote();
   }
 
   let handleChange = (e) => {
