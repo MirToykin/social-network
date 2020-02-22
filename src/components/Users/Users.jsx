@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Users.module.css";
 import User from "./User/User";
 import UsersPagination from "./UsersPagination/UsersPagination";
-import Preloader from "../common/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 
 const Users = (props) => {
   return (
