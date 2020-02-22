@@ -1,13 +1,14 @@
 import React from "react";
 import classes from './User.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
+import {NavLink} from "react-router-dom";
 
 const User = (props) => {
   return (
     <div className={classes.userCard}>
       <div className={classes.userCardLeft}>
         <div className={classes.avaContainer}>
-          <img src={props.smallPhoto ? props.smallPhoto : userPhoto} alt={props.name}/>
+          <NavLink to={'profile/' + props.id} ><img src={props.smallPhoto ? props.smallPhoto : userPhoto} alt={props.name}/></NavLink>
         </div>
         <div className={classes.buttonContainer}>
           {props.followed ?

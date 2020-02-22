@@ -1,7 +1,15 @@
 .usersContainer {
-  width: 60%;
+  width: 80%;
   padding: 40px;
+  display: flex;
+  justify-content: space-between;
 }
+
+.usersItemsWrap {
+  width: 60%;
+}
+
+
 /*userItemsWrap {*/
 /*  position: relative;*/
 /*}*/

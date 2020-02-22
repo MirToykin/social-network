@@ -4,4 +4,13 @@
 
 .descriptionBlock {
     padding: 1em;
+    display: flex;
+}
+
+.avaContainer {
+    margin-right: 2em;
+}
+
+.contacts p span {
+    text-decoration: underline;
 }

@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD_POST';
 const CHANGE_POST_VALUE = 'CHANGE_POST_VALUE';
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 let initialState = {
   postsData: [
@@ -10,38 +11,47 @@ let initialState = {
   addPost: {
     btnText: 'Add Post'
   },
-  postValue: ''
+  postValue: '',
+  userProfile: null
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
-      let postValue = state.postValue;
-      return {
+    case ADD_POST: return {
         ...state,
         postValue: '',
-        postsData: [...state.postsData, {id: 5, text: postValue, likesCount: 0}]
+        postsData: [...state.postsData, {id: 5, text: state.postValue, likesCount: 0}]
       }
-    case CHANGE_POST_VALUE:
-      return {
+    case CHANGE_POST_VALUE: return {
         ...state,
         postValue: action.value
       }
+    case SET_USER_PROFILE: return {
+      ...state,
+      userProfile: action.userProfile
+    }
     default:
       return state;
   }
 }
 
-export const addPostActionCreator = () => {
+export const addPost = () => {
   return {
     type: ADD_POST
   }
 }
 
-export const changePostValueActionCreator = (value) => {
+export const changePostValue = (value) => {
   return {
     type: CHANGE_POST_VALUE,
-    value: value
+    value
+  }
+}
+
+export const setUserProfile = (userProfile) => {
+  return {
+    type: SET_USER_PROFILE,
+    userProfile
   }
 }
 
