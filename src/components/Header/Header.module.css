@@ -1,9 +1,20 @@
 .header {
   grid-area: h;
   background-color: green;
-  padding-left: 1em;
+  padding:1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header a {
+  color: #fff;
+  display: block;
 }
 
 .header img {
   height: 85px;
 }
+
+.login {
+  text-align: center;
+} 

@@ -12,7 +12,7 @@
   'h h'
   'n c';
 
-  grid-template-rows: 85px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: 2fr 10fr;
 }
 
