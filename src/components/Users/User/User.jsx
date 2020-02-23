@@ -2,8 +2,35 @@ import React from "react";
 import classes from './User.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
 
 const User = (props) => {
+  let follow = (id) => {
+    axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + id, {}, {
+      withCredentials: true,
+      headers: {
+        "API-KEY": "a5a2c387-e5c5-41da-a00a-1e342607940a"
+      }
+    }).then(response => {
+      if (response.data.resultCode === 0) {{
+        props.follow(id)
+      }}
+    })
+  }
+
+  let unfollow = (id) => {
+    axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + id, {
+      withCredentials: true,
+      headers: {
+        "API-KEY": "a5a2c387-e5c5-41da-a00a-1e342607940a"
+      }
+    }).then(response => {
+      if (response.data.resultCode === 0) {{
+        props.unfollow(id)
+      }}
+    })
+  }
+
   return (
     <div className={classes.userCard}>
       <div className={classes.userCardLeft}>
@@ -12,8 +39,8 @@ const User = (props) => {
         </div>
         <div className={classes.buttonContainer}>
           {props.followed ?
-            <button onClick={() => props.unfollow(props.id)}>Unfollow</button> :
-            <button onClick={() => props.follow(props.id)}>Follow</button>
+            <button onClick={() => unfollow(props.id)}>Unfollow</button> :
+            <button onClick={() => follow(props.id)}>Follow</button>
           }
         </div>
       </div>
