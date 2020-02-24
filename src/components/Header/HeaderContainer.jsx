@@ -4,21 +4,18 @@ import {connect} from "react-redux";
 import {setAuthData, setAuthUserProfile, setIsFetching} from "../../redux/auth-reducer";
 import * as axios from "axios";
 import {setUserProfile} from "../../redux/profile-reducer";
+import api from "../../api/api";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
     this.props.setIsFetching(true);
-    axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-      withCredentials: true
-    }).then(authResponse => {
+    api.get('auth/me').then(authResponse => {
       this.props.setIsFetching(false);
-      if (authResponse.data.resultCode === 0) {
-        let {id, login, email} = authResponse.data.data;
+      if (authResponse.resultCode === 0) {
+        let {id, login, email} = authResponse.data;
         this.props.setAuthData(id, login, email);
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + id, {
-          withCredentials: true
-        }).then(userResponse => {
-            this.props.setAuthUserProfile(userResponse.data);
+        api.get('profile', null, null, id).then(userResponse => {
+            this.props.setAuthUserProfile(userResponse);
           })
       }
     })

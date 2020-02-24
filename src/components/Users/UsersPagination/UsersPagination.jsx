@@ -6,7 +6,7 @@ const UsersPagination = (props) => {
   for (let i = 1; i <= Math.ceil(props.totalUsersCount/props.pageSize); i++) {
     pages.push(<span
       className={props.currentPage === i ? classes.pageNum + ' ' + classes.active : classes.pageNum}
-      onClick={() => props.handlePageNumClick(props.pageSize, i)}
+      onClick={() => props.handlePageNumClick(props.pageSize, i)} key={i}
     >{i}</span>)
   }
   return (

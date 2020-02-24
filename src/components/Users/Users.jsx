@@ -12,6 +12,7 @@ const Users = (props) => {
         {props.users.map(u => {
           return <User
             id={u.id}
+            key={u.id}
             name={u.name}
             smallPhoto={u.photos.small}
             followed={u.followed}
