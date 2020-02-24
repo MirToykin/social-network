@@ -6,14 +6,18 @@ import api from "../../../api/api";
 
 const User = (props) => {
   let follow = (id) => {
+    props.toggleIsFollowingInProgress(true, id)
     api.post('follow', id).then(response => {
       if (response.resultCode === 0) props.follow(id)
+      props.toggleIsFollowingInProgress(false, id)
     })
   }
 
   let unfollow = (id) => {
+    props.toggleIsFollowingInProgress(true, id)
     api.delete('follow', id).then(response => {
       if (response.resultCode === 0) props.unfollow(id)
+      props.toggleIsFollowingInProgress(false, id)
     })
   }
 
@@ -25,8 +29,8 @@ const User = (props) => {
         </div>
         <div className={classes.buttonContainer}>
           {props.followed ?
-            <button onClick={() => unfollow(props.id)}>Unfollow</button> :
-            <button onClick={() => follow(props.id)}>Follow</button>
+            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => unfollow(props.id)}>Unfollow</button> :
+            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => follow(props.id)}>Follow</button>
           }
         </div>
       </div>

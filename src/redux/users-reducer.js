@@ -4,13 +4,15 @@ const SET_USERS = 'SET_STATE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_IS_FOLLOWING_IN_PROGRESS';
 
 let initialState = {
   usersData: [],
   totalUsersCount: 0,
   pageSize: 10,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  isFollowingInProgress: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -37,7 +39,11 @@ const usersReducer = (state = initialState, action) => {
     case SET_USERS: return {...state, usersData: action.users};
     case SET_TOTAL_USERS_COUNT: return {...state, totalUsersCount: action.totalUsersCount};
     case SET_CURRENT_PAGE: return {...state, currentPage: action.currentPage};
-    case TOGGLE_IS_FETCHING: return {...state, isFetching: action.isFetching}
+    case TOGGLE_IS_FETCHING: return {...state, isFetching: action.isFetching};
+    case TOGGLE_IS_FOLLOWING_IN_PROGRESS:
+      return action.isInProgress ?
+        {...state, isFollowingInProgress: [...state.isFollowingInProgress, action.userId]} :
+        {...state, isFollowingInProgress: state.isFollowingInProgress.filter((id) => id !== action.userId)}
     default: return state;
   }
 }
@@ -59,28 +65,36 @@ export const unfollow = (userId) => {
 export const setUsers = (users) => {
   return {
     type: SET_USERS,
-    users: users
+    users
   }
 }
 
 export const setTotalUsersCount = (totalUsersCount) => {
   return {
     type: SET_TOTAL_USERS_COUNT,
-    totalUsersCount: totalUsersCount
+    totalUsersCount
   }
 }
 
 export const setCurrentPage = (currentPage) => {
   return {
     type: SET_CURRENT_PAGE,
-    currentPage: currentPage
+    currentPage
   }
 }
 
 export const toggleIsFetching = (isFetching) => {
   return {
     type: TOGGLE_IS_FETCHING,
-    isFetching: isFetching
+    isFetching
+  }
+}
+
+export const toggleIsFollowingInProgress = (isInProgress, userId) => {
+  return {
+    type: TOGGLE_IS_FOLLOWING_IN_PROGRESS,
+    isInProgress,
+    userId
   }
 }
 
