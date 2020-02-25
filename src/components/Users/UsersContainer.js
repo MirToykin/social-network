@@ -1,32 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-  follow, setCurrentPage,
-  setTotalUsersCount,
-  setUsers, toggleIsFetching, toggleIsFollowingInProgress,
-  unfollow
-} from "../../redux/users-reducer";
-import api from "../../api/api";
+import {follow, getUsersData, unfollow} from "../../redux/users-reducer";
 import Users from "./Users";
 
 class UsersContainer extends React.Component {
-
   componentDidMount() {
-    this.getUsersData(this.props.pageSize, this.props.currentPage);
-  }
-
-  getUsersData(pageSize, currentPage) {
-    this.props.toggleIsFetching(true);
-    api.get('users', pageSize, currentPage).then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.items);
-        this.props.setTotalUsersCount(response.totalCount);
-      })
-  }
-
-  handlePageNumClick = (pageSize, currentPage) => {
-    this.props.setCurrentPage(currentPage);
-    this.getUsersData(pageSize, currentPage)
+    this.props.getUsersData(this.props.pageSize, this.props.currentPage);
   }
 
   render() {
@@ -38,10 +17,9 @@ class UsersContainer extends React.Component {
         users={this.props.users}
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        handlePageNumClick={this.handlePageNumClick}
+        handlePageNumClick={this.props.getUsersData}
         isFetching={this.props.isFetching}
         isFollowingInProgress={this.props.isFollowingInProgress}
-        toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
       />
     )
   }
@@ -58,12 +36,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {
-  follow,
-  setCurrentPage,
-  setTotalUsersCount,
-  setUsers,
-  toggleIsFetching,
-  unfollow,
-  toggleIsFollowingInProgress
-})(UsersContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    follow: (id) => {dispatch(follow(id))},
+    unfollow: (id) => dispatch(unfollow((id))),
+    getUsersData: (pageSize, currentPage) => dispatch(getUsersData(pageSize, currentPage))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)

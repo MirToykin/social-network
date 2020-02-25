@@ -2,24 +2,8 @@ import React from "react";
 import classes from './User.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
 import {NavLink} from "react-router-dom";
-import api from "../../../api/api";
 
 const User = (props) => {
-  let follow = (id) => {
-    props.toggleIsFollowingInProgress(true, id)
-    api.post('follow', id).then(response => {
-      if (response.resultCode === 0) props.follow(id)
-      props.toggleIsFollowingInProgress(false, id)
-    })
-  }
-
-  let unfollow = (id) => {
-    props.toggleIsFollowingInProgress(true, id)
-    api.delete('follow', id).then(response => {
-      if (response.resultCode === 0) props.unfollow(id)
-      props.toggleIsFollowingInProgress(false, id)
-    })
-  }
 
   return (
     <div className={classes.userCard}>
@@ -29,8 +13,8 @@ const User = (props) => {
         </div>
         <div className={classes.buttonContainer}>
           {props.followed ?
-            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => unfollow(props.id)}>Unfollow</button> :
-            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => follow(props.id)}>Follow</button>
+            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => props.unfollow(props.id)}>Unfollow</button> :
+            <button disabled={props.isFollowingInProgress.some((id) => id === props.id)} onClick={() => props.follow(props.id)}>Follow</button>
           }
         </div>
       </div>

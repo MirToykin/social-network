@@ -1,3 +1,5 @@
+import api from "../api/api";
+
 const ADD_POST = 'ADD_POST';
 const CHANGE_POST_VALUE = 'CHANGE_POST_VALUE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -53,6 +55,13 @@ export const setUserProfile = (userProfile) => {
     type: SET_USER_PROFILE,
     userProfile
   }
+}
+
+export const getUserProfile = (userId = 6004) => (dispatch) => { //thunk creator
+  api.get('profile', null, null, userId)
+    .then(response => {
+      dispatch(setUserProfile(response));
+    })
 }
 
 export default profileReducer
