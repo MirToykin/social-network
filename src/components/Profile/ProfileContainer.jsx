@@ -1,9 +1,10 @@
 import React from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile, setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router-dom";
+import withAuthRedirect from "../HOC/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -34,4 +35,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const profileContainerWithUrlData = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, mapDispatchToProps)(profileContainerWithUrlData)
+export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(profileContainerWithUrlData))

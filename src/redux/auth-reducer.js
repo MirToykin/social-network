@@ -56,6 +56,8 @@ export const getAuth = () => (dispatch) => {
         dispatch(setAuthUserProfile(userResponse));
         dispatch(setIsFetching(false));
       })
+    } else {
+      dispatch(setIsFetching(false));
     }
   })
 }

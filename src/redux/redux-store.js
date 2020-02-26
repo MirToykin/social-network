@@ -1,4 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import navbarReducer from "./navbar-reducer";
@@ -14,7 +15,7 @@ let reducers = combineReducers({
   auth: authReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 window.store = store;
 
 export default store
