@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
-import {Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -17,14 +17,15 @@ const App = (props) => {
       <HeaderContainer/>
       <NavBar store={props.store}/>
       <div className='app-wrapper-content'>
+        <Route path='/' exact render={() => <Redirect to={'/profile'} />}/>
         <Route path='/dialogs'
-               render={() => <DialogsContainer/>}
+               component={DialogsContainer}
         />
         <Route path='/profile/:userId?'
-               render={() => <ProfileContainer/>}
+               component={ProfileContainer}
         />
         <Route path='/users'
-               render={() => <UsersContainer/>}
+               component={UsersContainer}
         />
         <Route path='/news' component={News}/>
         <Route path='/music' component={Music}/>

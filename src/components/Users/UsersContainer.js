@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {follow, getUsersData, unfollow} from "../../redux/users-reducer";
 import Users from "./Users";
-import withAuthRedirect from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(UsersContainer)

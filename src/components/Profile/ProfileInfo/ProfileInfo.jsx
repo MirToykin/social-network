@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './ProfileInfo.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
   const contacts = props.userProfile.contacts;
@@ -34,7 +35,14 @@ const ProfileInfo = (props) => {
             {isContacts ? <h4>My contacts:</h4> : null}
             {contactsElems}
           </div>
+
         </div>
+      </div>
+      <div>
+        <ProfileStatus
+          updateStatus={props.updateStatus}
+          status={props.status}
+          isAuthProfile={props.authId === props.userProfile.userId}/>
       </div>
     </div>
   )

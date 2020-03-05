@@ -2,7 +2,8 @@ import api from "../api/api";
 
 const ADD_POST = 'ADD_POST';
 const CHANGE_POST_VALUE = 'CHANGE_POST_VALUE';
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
 let initialState = {
   postsData: [
@@ -14,7 +15,8 @@ let initialState = {
     btnText: 'Add Post'
   },
   postValue: '',
-  userProfile: null
+  userProfile: null,
+  profileStatus: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -31,6 +33,10 @@ const profileReducer = (state = initialState, action) => {
     case SET_USER_PROFILE: return {
       ...state,
       userProfile: action.userProfile
+    }
+    case SET_PROFILE_STATUS: return {
+      ...state,
+      profileStatus: action.status
     }
     default:
       return state;
@@ -50,7 +56,14 @@ export const changePostValue = (value) => {
   }
 }
 
-export const setUserProfile = (userProfile) => {
+const setProfileStatus = (status) => {
+  return {
+    type: SET_PROFILE_STATUS,
+    status
+  }
+}
+
+const setUserProfile = (userProfile) => {
   return {
     type: SET_USER_PROFILE,
     userProfile
@@ -61,6 +74,22 @@ export const getUserProfile = (userId = 6004) => (dispatch) => { //thunk creator
   api.get('profile', null, null, userId)
     .then(response => {
       dispatch(setUserProfile(response));
+    })
+}
+
+export const getStatus = (id = 6004) => (dispatch) => {
+  api.get('profile/status', null, null, id)
+    .then(response => {
+      dispatch(setProfileStatus(response));
+    })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+  api.put('profile/status', {status})
+    .then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(setProfileStatus(status))
+      }
     })
 }
 

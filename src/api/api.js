@@ -22,10 +22,18 @@ let api = {
       case 'profile':
         promise = this.ajax.get(`${endpoint}/${id}`)
         break;
+      case 'profile/status':
+        promise = this.ajax.get(`${endpoint}/${id}`)
+        break;
       default:
         return
     }
     return promise.then(response => response.data);
+  },
+
+  delete(endpoint, id) {
+    return this.ajax.delete(`${endpoint}/${id}`)
+      .then(response => response.data)
   },
 
   post(endpoint, id) {
@@ -33,10 +41,11 @@ let api = {
       .then(response => response.data)
   },
 
-  delete(endpoint, id) {
-    return this.ajax.delete(`${endpoint}/${id}`)
-      .then(response => response.data)
+  put(endpoint, payload) {
+    return this.ajax.put(endpoint, payload);
   }
+
+
 }
 
 export default api;

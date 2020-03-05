@@ -52,7 +52,6 @@ export const getAuth = () => (dispatch) => {
       dispatch(setAuthData(id, login, email));
       // dispatch(setIsFetching(true));
       api.get('profile', null, null, id).then(userResponse => {
-        console.log(userResponse)
         dispatch(setAuthUserProfile(userResponse));
         dispatch(setIsFetching(false));
       })
