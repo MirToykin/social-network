@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {getAuth} from "../../redux/auth-reducer";
+import {setUserProfile} from "../../redux/profile-reducer";
 
 
 class HeaderContainer extends React.Component {
@@ -24,7 +25,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAuth: () => dispatch(getAuth())
+    getAuth: () => dispatch(getAuth()),
+    // setUserProfile: (profile) => dispatch(setUserProfile(profile))
   }
 }
 

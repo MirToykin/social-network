@@ -10,7 +10,7 @@ const Header = (props) => {
       <img src='https://s2.logaster.com/static/v3/img/products/logo.png' alt='logo'/>
       {props.auth.isFetching ? <Preloader/> : props.auth.isAuth ?
         <div>
-          {/*<NavLink onClick={() => props.setUserProfile(props.auth.authUserProfile)} to={'/profile/' + props.auth.id}>*/}
+          {/*<NavLink onClick={() => props.setUserProfile(props.auth.authUserProfile)} to={'/profile'}>*/}
             <img
               src={props.auth.authUserProfile.photos.small ? props.auth.authUserProfile.photos.small : defaultUserPhoto}
               alt={props.auth.login}/>

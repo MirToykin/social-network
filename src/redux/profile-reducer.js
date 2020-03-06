@@ -63,7 +63,7 @@ const setProfileStatus = (status) => {
   }
 }
 
-const setUserProfile = (userProfile) => {
+export const setUserProfile = (userProfile) => {
   return {
     type: SET_USER_PROFILE,
     userProfile

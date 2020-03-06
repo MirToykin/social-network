@@ -5,25 +5,26 @@ let api = {
   ajax: axios.create({
     withCredentials: true,
     headers: {
-      "API-KEY": "a5a2c387-e5c5-41da-a00a-1e342607940a"
+      "API-KEY": "8c5f5372-65f7-4660-b011-3fa7e51ef5dc"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
   }),
 
   get(endpoint, count, page, id) {
     let promise;
+    let get = this.ajax.get;
     switch (endpoint) {
       case 'users':
-        promise = this.ajax.get(`${endpoint}?count=${count}&page=${page}`)
+        promise = get(`${endpoint}?count=${count}&page=${page}`)
         break;
       case 'auth/me':
-        promise = this.ajax.get(`${endpoint}`)
+        promise = get(`${endpoint}`)
         break;
       case 'profile':
-        promise = this.ajax.get(`${endpoint}/${id}`)
+        promise = get(`${endpoint}/${id}`)
         break;
       case 'profile/status':
-        promise = this.ajax.get(`${endpoint}/${id}`)
+        promise = get(`${endpoint}/${id}`)
         break;
       default:
         return
@@ -36,9 +37,20 @@ let api = {
       .then(response => response.data)
   },
 
-  post(endpoint, id) {
-    return this.ajax.post(`${endpoint}/${id}`)
-      .then(response => response.data)
+  post(endpoint, id, loginData) {
+    let promise;
+    let post = this.ajax.post;
+    switch (endpoint) {
+      case 'follow':
+        promise = post(`${endpoint}/${id}`)
+        break;
+      case 'auth/login':
+        promise = post(`${endpoint}`, loginData)
+        break;
+      default:
+        return
+    }
+    return promise.then(response => response.data);
   },
 
   put(endpoint, payload) {

@@ -15,28 +15,32 @@ let initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_AUTH_DATA: return {...state, ...action.authData, isAuth: true};
-    case SET_IS_FETCHING: return {...state, isFetching: action.isFetching};
-    case SET_AUTH_USER_PROFILE: return {...state, authUserProfile: action.authUserProfile};
-    default: return state;
+    case SET_AUTH_DATA:
+      return {...state, ...action.authData, isAuth: true};
+    case SET_IS_FETCHING:
+      return {...state, isFetching: action.isFetching};
+    case SET_AUTH_USER_PROFILE:
+      return {...state, authUserProfile: action.authUserProfile};
+    default:
+      return state;
   }
 }
 
-export const setAuthData = (id, login, email) => {
+const setAuthData = (id, login, email) => {
   return {
     type: SET_AUTH_DATA,
     authData: {id, login, email}
   }
 }
 
-export const setIsFetching = (isFetching) => {
+const setIsFetching = (isFetching) => {
   return {
     type: SET_IS_FETCHING,
     isFetching
   }
 }
 
-export const setAuthUserProfile = (authUserProfile) => {
+const setAuthUserProfile = (authUserProfile) => {
   return {
     type: SET_AUTH_USER_PROFILE,
     authUserProfile
@@ -46,19 +50,27 @@ export const setAuthUserProfile = (authUserProfile) => {
 export const getAuth = () => (dispatch) => {
   dispatch(setIsFetching(true));
   api.get('auth/me').then(authResponse => {
-    // dispatch(setIsFetching(false));
     if (authResponse.resultCode === 0) {
       let {id, login, email} = authResponse.data;
       dispatch(setAuthData(id, login, email));
-      // dispatch(setIsFetching(true));
-      api.get('profile', null, null, id).then(userResponse => {
-        dispatch(setAuthUserProfile(userResponse));
-        dispatch(setIsFetching(false));
-      })
+      api.get('profile', null, null, id)
+        .then(userResponse => {
+          dispatch(setAuthUserProfile(userResponse));
+          dispatch(setIsFetching(false));
+        })
     } else {
       dispatch(setIsFetching(false));
     }
   })
+}
+
+export const logIn = (loginData) => (dispatch) => {
+  api.post('auth/login', null, loginData)
+    .then(response => {
+      if(response.resultCode === 0) {
+        dispatch(getAuth());
+      }
+    })
 }
 
 export default authReducer;
