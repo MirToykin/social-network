@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
-const CHANGE_MESSAGE_VALUE = 'CHANGE_MESSAGE_VALUE'
 
 let initialState = {
   dialogsItems: [
@@ -31,46 +30,30 @@ let initialState = {
   ],
   messages: [
     {id: 1, text: 'How are you?'},
-    {id: 1, text: 'I am fine, what about you?'},
-    {id: 1, text: 'Me too'},
-    {id: 1, text: 'Good'},
-    {id: 1, text: 'Of course'}
+    {id: 2, text: 'I am fine, what about you?'},
+    {id: 3, text: 'Me too'},
+    {id: 4, text: 'Good'},
+    {id: 5, text: 'Of course'}
   ],
-  addMessage: {
-    btnText: 'Add Message'
-  },
-  messageValue: ''
+  newMessageFormName: 'newMessageForm'
 };
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
-      let messageValue = state.messageValue;
       return {
         ...state,
-        messageValue: '',
-        messages: [...state.messages, {id: 6, text: messageValue}]
+        messages: [...state.messages, {id: 6, text: action.message.messageText}]
       }
-    case CHANGE_MESSAGE_VALUE:
-      return {
-        ...state,
-        messageValue: action.value
-      };
     default:
       return state;
   }
 }
 
-export const addMessageActionCreator = () => {
+export const addMessageActionCreator = message => {
   return {
-    type: ADD_MESSAGE
-  }
-}
-
-export const changeMessageValueActionCreator = (value) => {
-  return {
-    type: CHANGE_MESSAGE_VALUE,
-    value: value
+    type: ADD_MESSAGE,
+    message
   }
 }
 

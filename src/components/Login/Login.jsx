@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 
 const LoginForm = props => {
+  const {pristine, submitting} = props;
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -13,7 +14,7 @@ const LoginForm = props => {
       <div>
         <Field name={'rememberMe'} component={'input'} type={'checkbox'}/> Remember me
       </div>
-      <button>Submit</button>
+      <button disabled={pristine || submitting}>Submit</button>
     </form>
   )
 }

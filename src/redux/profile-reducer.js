@@ -1,7 +1,6 @@
 import api from "../api/api";
 
 const ADD_POST = 'ADD_POST';
-const CHANGE_POST_VALUE = 'CHANGE_POST_VALUE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
@@ -11,12 +10,9 @@ let initialState = {
     {id: 2, text: 'Congratulations', likesCount: 10},
     {id: 3, text: 'Thanks', likesCount: 11},
   ],
-  addPost: {
-    btnText: 'Add Post'
-  },
-  postValue: '',
   userProfile: null,
-  profileStatus: ''
+  profileStatus: '',
+  newPostFormName: 'newPostForm'
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -24,11 +20,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST: return {
         ...state,
         postValue: '',
-        postsData: [...state.postsData, {id: 5, text: state.postValue, likesCount: 0}]
-      }
-    case CHANGE_POST_VALUE: return {
-        ...state,
-        postValue: action.value
+        postsData: [...state.postsData, {id: 5, text: action.post.postText, likesCount: 0}]
       }
     case SET_USER_PROFILE: return {
       ...state,
@@ -43,16 +35,10 @@ const profileReducer = (state = initialState, action) => {
   }
 }
 
-export const addPost = () => {
+export const addPost = (post) => {
   return {
-    type: ADD_POST
-  }
-}
-
-export const changePostValue = (value) => {
-  return {
-    type: CHANGE_POST_VALUE,
-    value
+    type: ADD_POST,
+    post
   }
 }
 

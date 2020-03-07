@@ -4,21 +4,21 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import withAuthRedirect from "../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {reset} from 'redux-form';
 
 const mapStateToProps = (state) => {
   return {
     dialogsItems: state.dialogs.dialogsItems,
     messages: state.dialogs.messages,
-    addMessageBtnText: state.dialogs.addMessage.btnText,
-    messageValue: state.dialogs.messageValue,
+    newMessageFormName:state.dialogs.newMessageFormName,
     isAuth: state.auth.isAuth
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: () => {dispatch(addMessageActionCreator())},
-    changeMessageValue: (text) => {dispatch(changeMessageValueActionCreator(text))}
+    addMessage: (message) => dispatch(addMessageActionCreator(message)),
+    reset: (formName) => dispatch(reset(formName))
   }
 }
 
