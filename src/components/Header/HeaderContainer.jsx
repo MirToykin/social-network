@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuth} from "../../redux/auth-reducer";
+import {getAuth, logOut} from "../../redux/auth-reducer";
 import {setUserProfile} from "../../redux/profile-reducer";
 
 
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAuth: () => dispatch(getAuth()),
-    // setUserProfile: (profile) => dispatch(setUserProfile(profile))
+    logOut: () => dispatch(logOut())
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {email, required} from "../../helpers/validators";
 import {emailInput, loginPasswordInput} from "../common/FormElems/FormElems";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = props => {
   const {pristine, submitting} = props;
@@ -24,6 +25,9 @@ const LoginForm = props => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
+  if (props.isAuth) {
+    return <Redirect to={'/profile'}/>
+  }
   return (
     <>
       <h1>Login</h1>

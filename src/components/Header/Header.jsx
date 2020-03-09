@@ -11,14 +11,17 @@ const Header = (props) => {
       {props.auth.isFetching ? <Preloader/> : props.auth.isAuth ?
         <div>
           {/*<NavLink onClick={() => props.setUserProfile(props.auth.authUserProfile)} to={'/profile'}>*/}
+          <div>
             <img
               src={props.auth.authUserProfile.photos.small ? props.auth.authUserProfile.photos.small : defaultUserPhoto}
               alt={props.auth.login}/>
+          </div>
           {/*</NavLink>*/}
           <p className={classes.login}>{props.auth.login}</p>
+          <a href='#' onClick={props.logOut}>Log Out</a>
         </div> :
         <div>
-          <NavLink to='/login'>Login</NavLink>
+          <NavLink to='/login'>Log In</NavLink>
         </div>}
     </header>
   )

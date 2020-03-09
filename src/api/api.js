@@ -33,8 +33,19 @@ let api = {
   },
 
   delete(endpoint, id) {
-    return this.ajax.delete(`${endpoint}/${id}`)
-      .then(response => response.data)
+    let promise;
+    let remove = this.ajax.delete;
+    switch (endpoint) {
+      case 'follow':
+        promise = remove(`${endpoint}/${id}`)
+        break;
+      case 'auth/login':
+        promise = remove(endpoint)
+        break;
+      default:
+        return
+    }
+    return promise.then(response => response.data);
   },
 
   post(endpoint, id, loginData) {
