@@ -10,20 +10,19 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {getAuth} from "./redux/auth-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {connect} from "react-redux";
+import {initializeApp} from "./redux/app-reducer";
 
 const App = (props) => {
 
   useEffect(() => {
-    props.getAuth();
+    props.initializeApp();
   }, [])
-  debugger
 
   return (
     <div className='app-wrapper'>
-      {props.isAuth ?
+      {props.isInitialized ?
         <><HeaderContainer/>
           <NavBar state={props.state}/>
           <div className='app-wrapper-content'>
@@ -49,13 +48,13 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-    isAuth: state.auth.isAuth
+    isInitialized: state.app.isInitialized
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAuth: () => dispatch(getAuth())
+    initializeApp: () => dispatch(initializeApp())
   }
 }
 
