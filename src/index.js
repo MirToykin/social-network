@@ -9,7 +9,7 @@ import {Provider} from "react-redux";
 
 ReactDOM.render(<BrowserRouter>
   <Provider store={store}>
-    <App store={store}/>
+    <App state={store.getState()}/>
   </Provider>
 </BrowserRouter>, document.getElementById('root'));
 

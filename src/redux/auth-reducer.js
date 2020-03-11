@@ -1,4 +1,5 @@
 import api from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
@@ -69,6 +70,11 @@ export const logIn = (loginData) => (dispatch) => {
     .then(response => {
       if(response.resultCode === 0) {
         dispatch(getAuth());
+      } else {
+        let message = response.messages.length ? response.messages[0] : 'Something went wrong...'
+        dispatch(stopSubmit('login', {
+          _error: message
+        }))
       }
     })
 }

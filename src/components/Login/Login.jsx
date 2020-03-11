@@ -3,9 +3,10 @@ import {Field, reduxForm} from "redux-form";
 import {email, required} from "../../helpers/validators";
 import {emailInput, loginPasswordInput} from "../common/FormElems/FormElems";
 import {Redirect} from "react-router-dom";
+import classes from './../common/FormElems/FormElems.module.css'
 
 const LoginForm = props => {
-  const {pristine, submitting} = props;
+  const {pristine, submitting, error} = props;
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -17,6 +18,9 @@ const LoginForm = props => {
       <div>
         <Field name={'rememberMe'} component={'input'} type={'checkbox'}/> Remember me
       </div>
+      {error && <div className={classes.formSummaryError}>
+        {error}
+      </div>}
       <button disabled={pristine || submitting}>Submit</button>
     </form>
   )

@@ -6,7 +6,7 @@ const createFormElement = (elemName, className) => ({input, type, meta: {touched
   return (
     <>
       {React.createElement(elemName, {
-        className: classes[className] + ' ' + (isError ? classes.error : ''),
+        className: classes[className] + (isError ? (' ' + classes.error) : ''),
         placeholder: props.placeholder,
         type: type,
         ...input

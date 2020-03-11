@@ -6,9 +6,9 @@ import {setUserProfile} from "../../redux/profile-reducer";
 
 
 class HeaderContainer extends React.Component {
-  componentDidMount() {
-    this.props.getAuth();
-  }
+  // componentDidMount() {
+  //   this.props.getAuth();
+  // }
 
   render() {
     return (

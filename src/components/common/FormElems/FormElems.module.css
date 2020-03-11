@@ -4,3 +4,6 @@
 .newMessageTextarea.error {
   border: 1px solid red;
 }
+.formSummaryError {
+  color: red;
+}

@@ -56,14 +56,14 @@ export const setUserProfile = (userProfile) => {
   }
 }
 
-export const getUserProfile = (userId = 6004) => (dispatch) => { //thunk creator
+export const getUserProfile = (userId) => (dispatch) => { //thunk creator
   api.get('profile', null, null, userId)
     .then(response => {
       dispatch(setUserProfile(response));
     })
 }
 
-export const getStatus = (id = 6004) => (dispatch) => {
+export const getStatus = (id) => (dispatch) => {
   api.get('profile/status', null, null, id)
     .then(response => {
       dispatch(setProfileStatus(response));
