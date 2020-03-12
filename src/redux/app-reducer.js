@@ -22,7 +22,8 @@ const setInitializedSuccess = () => {
 }
 
 export const initializeApp = () => async (dispatch) => {
-  await dispatch(getAuth());
+   const prom = await dispatch(getAuth());
+   console.log(prom);
   dispatch(setInitializedSuccess());
 }
 

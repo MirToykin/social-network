@@ -50,7 +50,7 @@ const setAuthUserProfile = (authUserProfile) => {
 
 export const getAuth = () => (dispatch) => {
   dispatch(setIsFetching(true));
-  api.get('auth/me').then(authResponse => {
+  return api.get('auth/me').then(authResponse => {
     if (authResponse.resultCode === 0) {
       let {id, login, email} = authResponse.data;
       dispatch(setAuthData(id, login, email, true));
