@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './ProfileInfo.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   const contacts = props.userProfile.contacts;
