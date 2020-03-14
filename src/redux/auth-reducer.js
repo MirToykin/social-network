@@ -27,7 +27,7 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-const setAuthData = (id, login, email, isAuth) => {
+export const setAuthData = (id, login, email, isAuth) => {
   return {
     type: SET_AUTH_DATA,
     authData: {id, login, email, isAuth}

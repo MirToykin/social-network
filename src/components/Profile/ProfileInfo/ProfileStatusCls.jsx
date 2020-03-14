@@ -19,7 +19,7 @@ export default class ProfileStatusCls extends Component {
     this.setState({
       editMode: false
     })
-    this.s
+    this.props.updateStatus(this.state.statusValue)
   }
 
   changeStatusValue = (e) => {

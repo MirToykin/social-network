@@ -4,6 +4,7 @@ import Post from './Post/Post'
 import NewPostForm from "./NewPostForm/NewPostForm";
 
 const MyPosts = (props) => {
+  console.log('my posts render')
   const handleSubmitAddPostForm = (post) => {
     props.addPost(post);
     props.reset(props.newPostFormName)

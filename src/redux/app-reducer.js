@@ -15,15 +15,14 @@ const appReducer = (state = initialState, action) => {
   }
 }
 
-const setInitializedSuccess = () => {
+export const setInitializedSuccess = () => {
   return {
     type: SET_INITIALIZE_SUCCESS
   }
 }
 
 export const initializeApp = () => async (dispatch) => {
-   const prom = await dispatch(getAuth());
-   console.log(prom);
+   await dispatch(getAuth());
   dispatch(setInitializedSuccess());
 }
 
