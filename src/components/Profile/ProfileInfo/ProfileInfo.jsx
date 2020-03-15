@@ -18,10 +18,6 @@ const ProfileInfo = (props) => {
   }
   return (
     <div>
-      {/*<div className={classes.imgContainer}>*/}
-      {/*  <img src='https://jssors8.azureedge.net/demos/image-slider/img/px-beach-daylight-fun-1430675-image.jpg'*/}
-      {/*       alt='wallpaper'/>*/}
-      {/*</div>*/}
       <div className={classes.descriptionBlock}>
         <div className={classes.avaContainer}>
           <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userPhoto} alt='avatar'/>

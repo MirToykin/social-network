@@ -1,40 +1,37 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
-import withAuthRedirect from "../HOC/withAuthRedirect";
 import {compose} from "redux";
 
-class ProfileContainer extends React.Component {
-  componentDidMount() {
-    let id = this.props.match.params.userId;
+function ProfileContainer(props) {
+  useEffect(() => {
+    let id = props.match.params.userId;
 
-    if(!id) {
-      id = this.props.loggedInUserId;
       if(!id) {
-        this.props.history.push('/login')
-        return;
+        id = props.loggedInUserId;
+        if(!id) {
+          props.history.push('/login')
+          return;
+        }
       }
-    }
 
-    this.props.getUserProfile(id);
-    this.props.getStatus(id);
-  }
+      props.getUserProfile(id);
+      props.getStatus(id);
+  }, [props.loggedInUserId])
 
-  render() {
-    if (!this.props.userProfile) {
-      return  <Preloader/>
-    }
-    return (
-      <Profile
-        userProfile={this.props.userProfile}
-        status={this.props.status}
-        updateStatus={this.props.updateStatus}
-        authId={this.props.authId}
-      />
-    )
+  if (!props.userProfile) {
+    return <Preloader/>
   }
+  return (
+    <Profile
+      userProfile={props.userProfile}
+      status={props.status}
+      updateStatus={props.updateStatus}
+      authId={props.authId}
+    />
+  )
 }
 
 const mapStateToProps = (state) => {

@@ -48,27 +48,46 @@ const setAuthUserProfile = (authUserProfile) => {
   }
 }
 
-export const getAuth = () => (dispatch) => {
+// export const getAuth = () => (dispatch) => {
+//   dispatch(setIsFetching(true));
+//   return api.get('auth/me').then(authResponse => {
+//     if (authResponse.resultCode === 0) {
+//       let {id, login, email} = authResponse.data;
+//       dispatch(setAuthData(id, login, email, true));
+//       api.get('profile', null, null, id)
+//         .then(userResponse => {
+//           dispatch(setAuthUserProfile(userResponse));
+//           dispatch(setIsFetching(false));
+//         })
+//     } else {
+//       dispatch(setIsFetching(false));
+//     }
+//   })
+// }
+
+export const getAuth = () => async (dispatch) => {
   dispatch(setIsFetching(true));
-  return api.get('auth/me').then(authResponse => {
-    if (authResponse.resultCode === 0) {
-      let {id, login, email} = authResponse.data;
-      dispatch(setAuthData(id, login, email, true));
-      api.get('profile', null, null, id)
-        .then(userResponse => {
-          dispatch(setAuthUserProfile(userResponse));
-          dispatch(setIsFetching(false));
-        })
-    } else {
-      dispatch(setIsFetching(false));
-    }
-  })
+  const authResponse = await api.get('auth/me');
+
+  if (authResponse.resultCode === 0) {
+
+    const {id, login, email} = authResponse.data;
+    dispatch(setAuthData(id, login, email, true));
+
+    const userResponse = await api.get('profile', null, null, id)
+    dispatch(setAuthUserProfile(userResponse));
+    dispatch(setIsFetching(false));
+
+  } else {
+    dispatch(setIsFetching(false));
+  }
+  return authResponse;
 }
 
 export const logIn = (loginData) => (dispatch) => {
   api.post('auth/login', null, loginData)
     .then(response => {
-      if(response.resultCode === 0) {
+      if (response.resultCode === 0) {
         dispatch(getAuth());
       } else {
         let message = response.messages.length ? response.messages[0] : 'Something went wrong...'
@@ -82,7 +101,7 @@ export const logIn = (loginData) => (dispatch) => {
 export const logOut = () => (dispatch) => {
   api.delete('auth/login')
     .then(response => {
-      if(response.resultCode === 0) {
+      if (response.resultCode === 0) {
         dispatch(setAuthData(null, null, null, false));
         dispatch(setAuthUserProfile(null));
       }
