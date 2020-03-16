@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, setUserProfile, updateStatus} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 
@@ -10,16 +10,24 @@ function ProfileContainer(props) {
     let id = props.match.params.userId;
 
       if(!id) {
-        id = props.loggedInUserId;
+        id = props.authId;
         if(!id) {
           props.history.push('/login')
           return;
         }
       }
 
-      props.getUserProfile(id);
+      // props.getUserProfile(id);
+      // props.getStatus(id);
+      if(props.authUserProfile && props.authUserProfile.userId === id) {
+        props.setUserProfile(props.authUserProfile);
+      } else {
+        props.getUserProfile(id);
+      }
+
       props.getStatus(id);
-  }, [props.loggedInUserId])
+
+  }, [props.authId])
 
   if (!props.userProfile) {
     return <Preloader/>
@@ -39,7 +47,7 @@ const mapStateToProps = (state) => {
     userProfile: state.profile.userProfile,
     status: state.profile.profileStatus,
     authId: state.auth.id,
-    loggedInUserId: state.auth.id
+    authUserProfile: state.auth.authUserProfile
   }
 }
 
@@ -47,7 +55,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserProfile: (userId) => dispatch(getUserProfile(userId)),
     getStatus: (id) => dispatch(getStatus(id)),
-    updateStatus: (status) => dispatch(updateStatus(status))
+    updateStatus: (status) => dispatch(updateStatus(status)),
+    setUserProfile: (userProfile) => dispatch(setUserProfile(userProfile))
   }
 }
 

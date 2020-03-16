@@ -13,7 +13,7 @@ import {
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsersData(this.props.pageSize, this.props.currentPage);
+    this.props.requestUsersData(this.props.pageSize, this.props.currentPage);
   }
 
   render() {

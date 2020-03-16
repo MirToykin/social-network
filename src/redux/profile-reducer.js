@@ -17,19 +17,22 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST: return {
+    case ADD_POST:
+      return {
         ...state,
         postValue: '',
         postsData: [...state.postsData, {id: 5, text: action.post.postText, likesCount: 0}]
       }
-    case SET_USER_PROFILE: return {
-      ...state,
-      userProfile: action.userProfile
-    }
-    case SET_PROFILE_STATUS: return {
-      ...state,
-      profileStatus: action.status
-    }
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: action.userProfile
+      }
+    case SET_PROFILE_STATUS:
+      return {
+        ...state,
+        profileStatus: action.status
+      }
     default:
       return state;
   }
@@ -56,27 +59,33 @@ export const setUserProfile = (userProfile) => {
   }
 }
 
-export const getUserProfile = (userId) => (dispatch) => { //thunk creator
-  api.get('profile', null, null, userId)
-    .then(response => {
-      dispatch(setUserProfile(response));
-    })
+export const getUserProfile = (userId) => async (dispatch) => { //thunk creator
+  try {
+    const response = await api.get('profile', null, null, userId)
+    dispatch(setUserProfile(response));
+  } catch (err) {
+    console.log(err)
+  }
 }
 
-export const getStatus = (id) => (dispatch) => {
-  api.get('profile/status', null, null, id)
-    .then(response => {
-      dispatch(setProfileStatus(response));
-    })
+export const getStatus = (id) => async (dispatch) => {
+  try {
+    const response = await api.get('profile/status', null, null, id)
+    dispatch(setProfileStatus(response));
+  } catch (err) {
+    console.log(err)
+  }
 }
 
-export const updateStatus = (status) => (dispatch) => {
-  api.put('profile/status', {status})
-    .then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setProfileStatus(status))
-      }
-    })
+export const updateStatus = (status) => async (dispatch) => {
+  try {
+    const response = await api.put('profile/status', {status})
+    if (response.data.resultCode === 0) {
+      dispatch(setProfileStatus(status))
+    }
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export default profileReducer

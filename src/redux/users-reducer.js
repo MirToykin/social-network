@@ -1,4 +1,5 @@
 import api from "../api/api";
+import {changeObjectInArray} from "../helpers/reducers-helpers";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -18,35 +19,31 @@ let initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
-  window.state = state;
   switch (action.type) {
-    case FOLLOW: return {
+    case FOLLOW:
+      return {
         ...state,
-        usersData: state.usersData.map((u) => {
-          if (u.id === action.id) {
-            return {...u, followed: true}
-          }
-          return u;
-        })
+        usersData: changeObjectInArray(state.usersData, 'id', action.id, {followed: true})
       }
-    case UNFOLLOW: return {
+    case UNFOLLOW:
+      return {
         ...state,
-        usersData: state.usersData.map((u) => {
-          if (u.id === action.id) {
-            return {...u, followed: false}
-          }
-          return u;
-        })
+        usersData: changeObjectInArray(state.usersData, 'id', action.id, {followed: false})
       }
-    case SET_USERS: return {...state, usersData: action.users};
-    case SET_TOTAL_USERS_COUNT: return {...state, totalUsersCount: action.totalUsersCount};
-    case SET_CURRENT_PAGE: return {...state, currentPage: action.currentPage};
-    case TOGGLE_IS_FETCHING: return {...state, isFetching: action.isFetching};
+    case SET_USERS:
+      return {...state, usersData: action.users};
+    case SET_TOTAL_USERS_COUNT:
+      return {...state, totalUsersCount: action.totalUsersCount};
+    case SET_CURRENT_PAGE:
+      return {...state, currentPage: action.currentPage};
+    case TOGGLE_IS_FETCHING:
+      return {...state, isFetching: action.isFetching};
     case TOGGLE_IS_FOLLOWING_IN_PROGRESS:
       return action.isInProgress ?
         {...state, isFollowingInProgress: [...state.isFollowingInProgress, action.userId]} :
         {...state, isFollowingInProgress: state.isFollowingInProgress.filter((id) => id !== action.userId)}
-    default: return state;
+    default:
+      return state;
   }
 }
 
@@ -100,30 +97,36 @@ const toggleIsFollowingInProgress = (isInProgress, userId) => {
   }
 }
 
-export const requestUsersData = (pageSize, currentPage) => (dispatch) => { //thunk creator
-  dispatch(toggleIsFetching(true));
-  api.get('users', pageSize, currentPage).then(response => {
+export const requestUsersData = (pageSize, currentPage) => async (dispatch) => { //thunk creator
+  try {
+    dispatch(toggleIsFetching(true));
+    const response = await api.get('users', pageSize, currentPage);
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(response.items));
     dispatch(setTotalUsersCount(response.totalCount));
     dispatch(setCurrentPage(currentPage));
-  })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
-export const follow = (id) => (dispatch) => { //thunk creator
-  dispatch(toggleIsFollowingInProgress(true, id))
-  api.post('follow', id).then(response => {
-    if (response.resultCode === 0) dispatch(displayFollow(id))
+const followUnfollowFlow = async (dispatch, id, method, displayFollowState) => { //thunk creator
+  try {
+    dispatch(toggleIsFollowingInProgress(true, id))
+    const response = await api[method]('follow', id);
+    if (response.resultCode === 0) dispatch(displayFollowState(id))
     dispatch(toggleIsFollowingInProgress(false, id))
-  })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
-export const unfollow = (id) => (dispatch) => { // thunk creator
-  dispatch(toggleIsFollowingInProgress(true, id))
-  api.delete('follow', id).then(response => {
-    if (response.resultCode === 0) dispatch(displayUnfollow(id))
-    dispatch(toggleIsFollowingInProgress(false, id))
-  })
+export const follow = (id) => async (dispatch) => { //thunk creator
+  followUnfollowFlow(dispatch, id, 'post', displayFollow)
+}
+
+export const unfollow = (id) => async (dispatch) => { // thunk creator
+  followUnfollowFlow(dispatch, id, 'delete', displayUnfollow)
 }
 
 export default usersReducer

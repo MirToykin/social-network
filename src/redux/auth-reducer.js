@@ -48,23 +48,6 @@ const setAuthUserProfile = (authUserProfile) => {
   }
 }
 
-// export const getAuth = () => (dispatch) => {
-//   dispatch(setIsFetching(true));
-//   return api.get('auth/me').then(authResponse => {
-//     if (authResponse.resultCode === 0) {
-//       let {id, login, email} = authResponse.data;
-//       dispatch(setAuthData(id, login, email, true));
-//       api.get('profile', null, null, id)
-//         .then(userResponse => {
-//           dispatch(setAuthUserProfile(userResponse));
-//           dispatch(setIsFetching(false));
-//         })
-//     } else {
-//       dispatch(setIsFetching(false));
-//     }
-//   })
-// }
-
 export const getAuth = () => async (dispatch) => {
   dispatch(setIsFetching(true));
   const authResponse = await api.get('auth/me');
@@ -84,28 +67,27 @@ export const getAuth = () => async (dispatch) => {
   return authResponse;
 }
 
-export const logIn = (loginData) => (dispatch) => {
-  api.post('auth/login', null, loginData)
-    .then(response => {
-      if (response.resultCode === 0) {
-        dispatch(getAuth());
-      } else {
-        let message = response.messages.length ? response.messages[0] : 'Something went wrong...'
-        dispatch(stopSubmit('login', {
-          _error: message
-        }))
-      }
-    })
+export const logIn = (loginData) => async (dispatch) => {
+  const response = await api.post('auth/login', null, loginData);
+
+  if (response.resultCode === 0) {
+    dispatch(getAuth());
+  } else {
+    let message = response.messages.length ? response.messages[0] : 'Something went wrong...'
+    dispatch(stopSubmit('login', {
+      _error: message
+    }))
+  }
 }
 
-export const logOut = () => (dispatch) => {
-  api.delete('auth/login')
-    .then(response => {
-      if (response.resultCode === 0) {
-        dispatch(setAuthData(null, null, null, false));
-        dispatch(setAuthUserProfile(null));
-      }
-    })
+export const logOut = () => async (dispatch) => {
+  const response = await api.delete('auth/login');
+
+  if (response.resultCode === 0) {
+    dispatch(setAuthData(null, null, null, false));
+    dispatch(setAuthUserProfile(null));
+  }
+
 }
 
 export default authReducer;
