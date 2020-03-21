@@ -1,12 +1,19 @@
 import React from "react";
 import classes from "./Users.module.css";
 import User from "./User/User";
-import UsersPagination from "./UsersPagination/UsersPagination";
+import Pagination from "../common/Pagination/Pagination";
 import Preloader from "../common/Preloader/Preloader";
 
 const Users = (props) => {
   return (
     <div className={classes.usersContainer}>
+      <Pagination
+        totalCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        handlePageNumClick={props.handlePageNumClick}
+        currentPagesIntervalSize={10}
+      />
       <div className={classes.usersItemsWrap}>
         {props.isFetching ? <Preloader/> : null}
         {props.users.map(u => {
@@ -26,12 +33,6 @@ const Users = (props) => {
           />
         })}
       </div>
-      <UsersPagination
-        totalUsersCount={props.totalUsersCount}
-        pageSize={props.pageSize}
-        currentPage={props.currentPage}
-        handlePageNumClick={props.handlePageNumClick}
-      />
     </div>
   )
 }

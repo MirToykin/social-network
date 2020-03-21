@@ -1,8 +1,6 @@
 .usersContainer {
   width: 80%;
   padding: 40px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .usersItemsWrap {
