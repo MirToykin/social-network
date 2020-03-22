@@ -1,18 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
 import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from './components/Users/UsersContainer'
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
+
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 
 const App = (props) => {
 
@@ -26,20 +29,22 @@ const App = (props) => {
         <><HeaderContainer/>
           <NavBar state={props.state}/>
           <div className='app-wrapper-content'>
-            <Route path='/' exact render={() => <Redirect to={'/profile'}/>}/>
-            <Route path='/dialogs'
-                   component={DialogsContainer}
-            />
-            <Route path='/profile/:userId?'
-                   component={ProfileContainer}
-            />
-            <Route path='/users'
-                   component={UsersContainer}
-            />
-            <Route path='/news' component={News}/>
-            <Route path='/music' component={Music}/>
-            <Route path='/settings' component={Settings}/>
-            <Route path='/login' component={LoginContainer}/>
+            <Suspense fallback={<Preloader/>}>
+              <Route path='/' exact render={() => <Redirect to={'/profile'}/>}/>
+              <Route path='/dialogs'
+                     component={DialogsContainer}
+              />
+              <Route path='/profile/:userId?'
+                     component={ProfileContainer}
+              />
+              <Route path='/users'
+                     component={UsersContainer}
+              />
+              <Route path='/news' component={News}/>
+              <Route path='/music' component={Music}/>
+              <Route path='/settings' component={Settings}/>
+              <Route path='/login' component={LoginContainer}/>
+            </Suspense>
           </div>
         </> : <Preloader dark={true}/>}
     </div>
