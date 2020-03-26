@@ -7,11 +7,12 @@ import store from './redux/redux-store'
 import {BrowserRouter, HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-ReactDOM.render(<HashRouter> // HashRouter для gh-pages, основной BrowserRouter
+/* HashRouter для gh-pages, основной BrowserRouter*/
+ReactDOM.render(<BrowserRouter>
   <Provider store={store}>
     <App state={store.getState()}/>
   </Provider>
-</HashRouter>, document.getElementById('root'));
+</BrowserRouter>, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

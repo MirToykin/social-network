@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, setUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, savePhoto, setUserProfile, updateStatus} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 
 function ProfileContainer(props) {
-  useEffect(() => {
-    let id = props.match.params.userId;
+  let id = props.match.params.userId;
 
+  useEffect(() => {
       if(!id) {
         id = props.authId;
         if(!id) {
@@ -27,7 +27,7 @@ function ProfileContainer(props) {
 
       props.getStatus(id);
 
-  }, [props.authId])
+  }, [props.authId, id])
 
   if (!props.userProfile) {
     return <Preloader/>
@@ -38,6 +38,7 @@ function ProfileContainer(props) {
       status={props.status}
       updateStatus={props.updateStatus}
       authId={props.authId}
+      savePhoto={props.savePhoto}
     />
   )
 }
@@ -56,7 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     getUserProfile: (userId) => dispatch(getUserProfile(userId)),
     getStatus: (id) => dispatch(getStatus(id)),
     updateStatus: (status) => dispatch(updateStatus(status)),
-    setUserProfile: (userProfile) => dispatch(setUserProfile(userProfile))
+    setUserProfile: (userProfile) => dispatch(setUserProfile(userProfile)),
+    savePhoto: (photoFile) => dispatch(savePhoto(photoFile))
   }
 }
 

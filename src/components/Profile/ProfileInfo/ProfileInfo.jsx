@@ -3,15 +3,20 @@ import classes from './ProfileInfo.module.css'
 import userPhoto from '../../../assets/imgs/user.png'
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = (props) => {
-  const contacts = props.userProfile.contacts;
+const ProfileInfo = ({userProfile, updateStatus, status, authId, savePhoto}) => {
+  const contacts = userProfile.contacts;
   let isContacts = false;
   const contactsElems = [];
+  const isOwner = authId === userProfile.userId;
+
+  const handleFileChoice = (e) => {
+    if (e.target.files.length) savePhoto(e.target.files[0]);
+  }
 
   for(let key in contacts) {
     if(contacts[key]) {
       contactsElems.push(
-        <p><span>{key}</span>: {contacts[key]}</p>
+        <p key={key}><span>{key}</span>: {contacts[key]}</p>
       );
       if (!isContacts) isContacts = true;
     }
@@ -20,12 +25,13 @@ const ProfileInfo = (props) => {
     <div>
       <div className={classes.descriptionBlock}>
         <div className={classes.avaContainer}>
-          <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userPhoto} alt='avatar'/>
+          <div><img src={userProfile.photos.large ? userProfile.photos.large : userPhoto} alt='avatar'/></div>
+          {isOwner && <div><input type="file" onChange={handleFileChoice}/></div>}
         </div>
         <div>
-          <h2>{props.userProfile.fullName}</h2>
+          <h2>{userProfile.fullName}</h2>
           <div className={classes.aboutMe}>
-            {props.userProfile.aboutMe ? [<h4>About me:</h4>, <p>{props.userProfile.aboutMe}</p>] : null}
+            {userProfile.aboutMe ? <><h4>About me:</h4><p>{userProfile.aboutMe}</p></> : null}
           </div>
           <div className={classes.contacts}>
             {isContacts ? <h4>My contacts:</h4> : null}
@@ -36,9 +42,9 @@ const ProfileInfo = (props) => {
       </div>
       <div>
         <ProfileStatus
-          updateStatus={props.updateStatus}
-          status={props.status}
-          isAuthProfile={props.authId === props.userProfile.userId}/>
+          updateStatus={updateStatus}
+          status={status}
+          isOwner={isOwner}/>
       </div>
     </div>
   )

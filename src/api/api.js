@@ -12,7 +12,7 @@ let api = {
 
   get(endpoint, count, page, id) {
     let promise;
-    let get = this.ajax.get;
+    const get = this.ajax.get;
     switch (endpoint) {
       case 'users':
         promise = get(`${endpoint}?count=${count}&page=${page}`)
@@ -34,7 +34,7 @@ let api = {
 
   delete(endpoint, id) {
     let promise;
-    let remove = this.ajax.delete;
+    const remove = this.ajax.delete;
     switch (endpoint) {
       case 'follow':
         promise = remove(`${endpoint}/${id}`)
@@ -50,13 +50,13 @@ let api = {
 
   post(endpoint, id, loginData) {
     let promise;
-    let post = this.ajax.post;
+    const post = this.ajax.post;
     switch (endpoint) {
       case 'follow':
         promise = post(`${endpoint}/${id}`)
         break;
       case 'auth/login':
-        promise = post(`${endpoint}`, loginData)
+        promise = post(endpoint, loginData)
         break;
       default:
         return
@@ -65,7 +65,25 @@ let api = {
   },
 
   put(endpoint, payload) {
-    return this.ajax.put(endpoint, payload);
+    let promise;
+    const put = this.ajax.put;
+    switch (endpoint) {
+      case 'profile/status':
+        promise = this.ajax.put(endpoint, payload);
+        break;
+      case 'profile/photo':
+        const formData = new FormData();
+        formData.append('image', payload)
+        promise = put(endpoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        break;
+      default:
+        return
+    }
+    return promise.then(response => response.data);
   }
 
 

@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from "react";
 import classes from './ProfileStatus.module.css'
 
-const ProfileStatus = props => {
+const ProfileStatus = ({isOwner, status, updateStatus}) => {
   const [editMode, setEditMode] = useState(false);
-  const [statusValue, setStatusValue] = useState(props.status);
+  const [statusValue, setStatusValue] = useState(status);
 
   useEffect(() => {
-    setStatusValue(props.status)
-  }, [props.status])
+    setStatusValue(status)
+  }, [status])
 
   const activateEditMode = () => {
-    if (props.isAuthProfile) {
+    if (isOwner) {
       setEditMode(true);
     }
   }
 
   const deactivateEditMode = () => {
     setEditMode(false);
-    props.updateStatus(statusValue)
+    updateStatus(statusValue)
   }
 
   const handleChangeStatusValue = e => {
@@ -28,7 +28,7 @@ const ProfileStatus = props => {
     <div className={classes.status}>
       {!editMode && <div>
           <span onDoubleClick={activateEditMode}>
-            {statusValue || props.isAuthProfile && 'Добавить статус'}
+            {statusValue || isOwner && 'Добавить статус'}
           </span>
       </div>}
       {editMode && <div>
