@@ -1,7 +1,5 @@
-.emailInput.error,
-.loginPasswordInput.error,
-.newPostTextarea.error,
-.newMessageTextarea.error {
+.myTextarea.error,
+.myInput.error {
   border: 1px solid red;
 }
 .formSummaryError {

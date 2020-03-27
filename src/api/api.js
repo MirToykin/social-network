@@ -68,8 +68,9 @@ let api = {
     let promise;
     const put = this.ajax.put;
     switch (endpoint) {
+      case 'profile':
       case 'profile/status':
-        promise = this.ajax.put(endpoint, payload);
+        promise = put(endpoint, payload);
         break;
       case 'profile/photo':
         const formData = new FormData();

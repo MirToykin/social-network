@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {email, required} from "../../helpers/validators";
-import {emailInput, loginPasswordInput} from "../common/FormElems/FormElems";
+import {myInput} from "../common/FormElems/FormElems";
 import {Redirect} from "react-router-dom";
 import classes from './../common/FormElems/FormElems.module.css'
 
@@ -10,10 +10,10 @@ const LoginForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={'Your email'} name={'email'} component={emailInput} type={'email'} validate={[required, email]}/>
+        <Field placeholder={'Your email'} name={'email'} component={myInput} type={'email'} validate={[required, email]}/>
       </div>
       <div>
-        <Field placeholder={'Your password'} name={'password'} component={loginPasswordInput} type={'password'} validate={[required]}/>
+        <Field placeholder={'Your password'} name={'password'} component={myInput} type={'password'} validate={[required]}/>
       </div>
       <div>
         <Field name={'rememberMe'} component={'input'} type={'checkbox'}/> Remember me

@@ -16,7 +16,5 @@ const createFormElement = (elemName, className) => ({input, type, meta: {touched
   )
 }
 
-export const newPostTextarea = createFormElement('textarea', 'newPostTextarea');
-export const newMessageTextarea = createFormElement('textarea', 'newMessageTextarea');
-export const emailInput = createFormElement('input', 'emailInput')
-export const loginPasswordInput = createFormElement('input', 'loginPasswordInput')
+export const myTextarea = createFormElement('textarea', 'myTextarea');
+export const myInput = createFormElement('input', 'myInput')

@@ -1,7 +1,14 @@
 import React, {useEffect} from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, savePhoto, setUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {
+  getStatus,
+  getUserProfile,
+  savePhoto,
+  saveProfileDescription,
+  setUserProfile,
+  updateStatus
+} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 
@@ -39,6 +46,7 @@ function ProfileContainer(props) {
       updateStatus={props.updateStatus}
       authId={props.authId}
       savePhoto={props.savePhoto}
+      saveProfileDescription={props.saveProfileDescription}
     />
   )
 }
@@ -58,7 +66,8 @@ const mapDispatchToProps = (dispatch) => {
     getStatus: (id) => dispatch(getStatus(id)),
     updateStatus: (status) => dispatch(updateStatus(status)),
     setUserProfile: (userProfile) => dispatch(setUserProfile(userProfile)),
-    savePhoto: (photoFile) => dispatch(savePhoto(photoFile))
+    savePhoto: (photoFile) => dispatch(savePhoto(photoFile)),
+    saveProfileDescription: (profileData) => dispatch(saveProfileDescription(profileData))
   }
 }
 
