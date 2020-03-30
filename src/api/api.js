@@ -18,7 +18,8 @@ let api = {
         promise = get(`${endpoint}?count=${count}&page=${page}`)
         break;
       case 'auth/me':
-        promise = get(`${endpoint}`)
+      case 'security/get-captcha-url':
+        promise = get(endpoint)
         break;
       case 'profile':
         promise = get(`${endpoint}/${id}`)

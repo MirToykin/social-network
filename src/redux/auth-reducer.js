@@ -1,9 +1,10 @@
 import api from "../api/api";
-import {stopSubmit} from "redux-form";
+import {SubmissionError} from "redux-form";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
 const SET_AUTH_USER_PROFILE = 'SET_AUTH_USER_PROFILE';
+const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL';
 
 let initialState = {
   id: null,
@@ -11,7 +12,8 @@ let initialState = {
   email: null,
   isFetching: false,
   isAuth: false,
-  authUserProfile: null
+  authUserProfile: null,
+  captchaUrl: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -22,6 +24,8 @@ const authReducer = (state = initialState, action) => {
       return {...state, isFetching: action.isFetching};
     case SET_AUTH_USER_PROFILE:
       return {...state, authUserProfile: action.authUserProfile};
+    case SET_CAPTCHA_URL:
+      return {...state, captchaUrl: action.url}
     default:
       return state;
   }
@@ -45,6 +49,13 @@ const setAuthUserProfile = (authUserProfile) => {
   return {
     type: SET_AUTH_USER_PROFILE,
     authUserProfile
+  }
+}
+
+const setCaptchaUrl = (url) => {
+  return {
+    type: SET_CAPTCHA_URL,
+    url
   }
 }
 
@@ -72,11 +83,16 @@ export const logIn = (loginData) => async (dispatch) => {
 
   if (response.resultCode === 0) {
     dispatch(getAuth());
+    dispatch(setCaptchaUrl(null))
   } else {
+    if (response.resultCode === 10) {
+      dispatch(getCaptchaUrl());
+    }
+
     let message = response.messages.length ? response.messages[0] : 'Something went wrong...'
-    dispatch(stopSubmit('login', {
+    throw new SubmissionError({
       _error: message
-    }))
+    })
   }
 }
 
@@ -88,6 +104,11 @@ export const logOut = () => async (dispatch) => {
     dispatch(setAuthUserProfile(null));
   }
 
+}
+
+const getCaptchaUrl = () => async (dispatch) => {
+  const response = await api.get('security/get-captcha-url');
+  dispatch(setCaptchaUrl(response.url))
 }
 
 export default authReducer;
