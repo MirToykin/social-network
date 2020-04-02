@@ -13,6 +13,7 @@ import LoginContainer from "./components/Login/LoginContainer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
+import MenuAppBar from "./components/Header/HeaderMUI";
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
@@ -26,7 +27,7 @@ const App = (props) => {
   return (
     <div className='app-wrapper'>
       {props.isInitialized ?
-        <><HeaderContainer/>
+        <><MenuAppBar/><HeaderContainer/>
           <NavBar state={props.state}/>
           <div className='app-wrapper-content'>
             <Suspense fallback={<Preloader/>}>
