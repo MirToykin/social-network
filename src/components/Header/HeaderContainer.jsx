@@ -1,12 +1,14 @@
 import React from 'react';
-import Header from "./Header";
 import {connect} from "react-redux";
 import {logOut} from "../../redux/auth-reducer";
+import MenuAppBar from "./HeaderMUI";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
 
 const HeaderContainer = props => {
   return (
-    <Header {...props}/>
+    <MenuAppBar {...props}/>
   )
 }
 
@@ -22,4 +24,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(HeaderContainer)

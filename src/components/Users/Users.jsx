@@ -3,16 +3,23 @@ import classes from "./Users.module.css";
 import User from "./User/User";
 import Pagination from "../common/Pagination/Pagination";
 import Preloader from "../common/Preloader/Preloader";
+import PaginationControlled from "../common/Pagination/PaginationMUI";
 
 const Users = (props) => {
   return (
     <div className={classes.usersContainer}>
-      <Pagination
+      {/*<Pagination*/}
+      {/*  totalCount={props.totalUsersCount}*/}
+      {/*  pageSize={props.pageSize}*/}
+      {/*  currentPage={props.currentPage}*/}
+      {/*  handlePageNumClick={props.handlePageNumClick}*/}
+      {/*  currentPagesIntervalSize={10}*/}
+      {/*/>*/}
+      <PaginationControlled
         totalCount={props.totalUsersCount}
         pageSize={props.pageSize}
         currentPage={props.currentPage}
         handlePageNumClick={props.handlePageNumClick}
-        currentPagesIntervalSize={10}
       />
       <div className={classes.usersItemsWrap}>
         {props.isFetching ? <Preloader/> : null}

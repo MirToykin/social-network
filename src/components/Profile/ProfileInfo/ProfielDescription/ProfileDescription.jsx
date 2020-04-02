@@ -33,7 +33,7 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
           status={status}
           isOwner={isOwner}/>
         <div className={classes.aboutMe}>
-          {userProfile.aboutMe ? <><h4>About me:</h4><p>{userProfile.aboutMe}</p></> : null}
+          {userProfile.aboutMe ? <><h4>About:</h4><p>{userProfile.aboutMe}</p></> : null}
         </div>
         <div className={classes.lookingForAJob}>
           <span>Looking for a job:</span> {userProfile.lookingForAJob ? 'Yes' : 'No'}
@@ -43,10 +43,10 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
             <span>Professional skills:</span> {userProfile.lookingForAJobDescription}</> : null}
         </div>
         <div className={classes.contacts}>
-          {isContacts ? <h4>My contacts:</h4> : null}
+          {isContacts ? <h4>Contacts:</h4> : null}
           {contactsElems}
         </div>
-        <button onClick={() => setEditMode(true)}>Edit profile</button>
+        {isOwner && <button onClick={() => setEditMode(true)}>Edit profile</button>}
       </div>}
     </>
   );
