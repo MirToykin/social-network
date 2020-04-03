@@ -4,7 +4,6 @@ import userPhoto from '../../../assets/imgs/user.png'
 import {NavLink} from "react-router-dom";
 
 const User = (props) => {
-
   return (
     <div className={classes.userCard}>
       <div className={classes.userCardLeft}>
