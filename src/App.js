@@ -1,6 +1,4 @@
 import React, {Suspense, useEffect} from 'react';
-// import './App.css'
-import NavBar from './components/NavBar/NavBar';
 import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -11,24 +9,32 @@ import LoginContainer from "./components/Login/LoginContainer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
-import MenuAppBar from "./components/Header/HeaderMUI";
 import Container from "@material-ui/core/Container";
+import {makeStyles} from "@material-ui/core/styles";
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: theme.spacing(12),
+    padding: theme.spacing(3)
+  }
+}));
+
 const App = (props) => {
+  const classes = useStyles();
 
   useEffect(() => {
     props.initializeApp();
   }, [])
 
   return (
-    <div className='app-wrapper'>
+    <div style={{backgroundColor: '#212121'}} className='app-wrapper'>
       {props.isInitialized ?
         <>
           <HeaderContainer/>
-          <Container>
+          <Container className={classes.container}>
             <div className='app-wrapper-content'>
               <Suspense fallback={<Preloader/>}>
                 <Route path='/' exact render={() => <Redirect to={'/profile'}/>}/>

@@ -6,11 +6,27 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store'
 import {BrowserRouter, HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {createMuiTheme} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: '#90caf9'
+    },
+    secondary: {
+      main: '#f48fb1'
+    }
+  }
+});
 
 /* HashRouter для gh-pages, основной BrowserRouter*/
 ReactDOM.render(<BrowserRouter>
   <Provider store={store}>
-    <App state={store.getState()}/>
+    <ThemeProvider theme={theme}>
+      <App state={store.getState()}/>
+    </ThemeProvider>
   </Provider>
 </BrowserRouter>, document.getElementById('root'));
 

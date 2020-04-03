@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(9)
   },
   appBar: {
-    padding: '.5vw'
+    height: theme.spacing(12)
   },
   link: {
     '&:hover': {
@@ -64,40 +64,30 @@ export default function MenuAppBar({auth: {isFetching, isAuth, authUserProfile, 
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Container>
           <Toolbar>
             <IconButton edge="end"
                         className={classes.menuButton}
-                        color="inherit"
-              // aria-label="menu"
-              // aria-controls="menu-appbar"
-              // aria-haspopup="true"
                         onClick={handleMenu}
             >
-              <MenuIcon/>
+              <MenuIcon color='primary'/>
             </IconButton>
             <Menu
-              // id="menu"
               anchorEl={anchorElMenu} // элемент рядом с которым будет отображено меню
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              // keepMounted
-              // transformOrigin={{
-              //   vertical: 'top',
-              //   horizontal: 'right',
-              // }}
               open={openMenu}
               onClose={handleCloseMenu}
             >
               {['Profile', 'Dialogs', 'News', 'Music', 'Settings', 'Users'].map(item => {
-                return <MenuItem onClick={handleCloseMenu} component={NavLink}
+                return <MenuItem key={item} onClick={handleCloseMenu} component={NavLink}
                                  to={`/${item.toLowerCase()}`}>{item}</MenuItem>
               })}
             </Menu>
-            <Typography variant="h6" className={classes.title}>
+            <Typography color='primary' variant="h6" className={classes.title}>
               Samurai-Network
             </Typography>
             {isFetching ? <Preloader/> : isAuth ?

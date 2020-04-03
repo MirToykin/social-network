@@ -9,8 +9,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import {NavLink} from "react-router-dom";
 import Menu from "@material-ui/core/Menu/Menu";
-import Button from "@material-ui/core/Button";
 import userPhoto from "../../../assets/imgs/user.png";
+import {withStyles} from "@material-ui/styles";
+import Pagination from "@material-ui/lab/Pagination/Pagination";
 
 const useStyles = makeStyles((theme) => ({
   inline: {
@@ -19,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(9),
     height: theme.spacing(9),
-    // marginRight: theme.spacing(3)
+  },
+  listItemText: {
+    marginLeft: theme.spacing(3)
   }
 }));
 
@@ -52,7 +55,7 @@ export default function UserCard({
   }
 
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem alignItems="center">
       <ListItemAvatar>
         <IconButton
           edge="end"
@@ -87,20 +90,9 @@ export default function UserCard({
         </Menu>
       </ListItemAvatar>
       <ListItemText
-        primary={name}
-        secondary={
-          <>
-            <Typography
-              component="span"
-              variant="body2"
-              className={classes.inline}
-              color="textPrimary"
-            >
-              {status}
-            </Typography>
-            {" — I'll be in your neighborhood doing errands this…"}
-          </>
-        }
+        className={classes.listItemText}
+        primary={<Typography color='primary'>{name}</Typography>}
+        secondary={<Typography color='textPrimary'>{status ? status : 'No status'}</Typography>}
       />
     </ListItem>
   );
