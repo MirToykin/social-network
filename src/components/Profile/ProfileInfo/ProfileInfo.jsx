@@ -9,19 +9,6 @@ const ProfileInfo = ({userProfile, updateStatus, status, authId, savePhoto, save
 
   return (
     <div className={classes.descriptionBlock}>
-      {/*<Grid container spacing='2'>*/}
-      {/*  <Grid item xs={12} md={4}>*/}
-      {/*    <ProfilePhoto isOwner={isOwner} userProfile={userProfile} savePhoto={savePhoto}/>*/}
-      {/*  </Grid>*/}
-      {/*  <Grid item xs={12} md={8}>*/}
-      {/*    <ProfileDescription userProfile={userProfile}*/}
-      {/*                        isOwner={isOwner}*/}
-      {/*                        status={status}*/}
-      {/*                        updateStatus={updateStatus}*/}
-      {/*                        saveProfileDescription={saveProfileDescription}*/}
-      {/*    />*/}
-      {/*  </Grid>*/}
-      {/*</Grid>*/}
       <ProfilePhoto isOwner={isOwner} userProfile={userProfile} savePhoto={savePhoto}/>
       <ProfileDescription userProfile={userProfile}
                           isOwner={isOwner}

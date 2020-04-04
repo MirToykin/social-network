@@ -10,8 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {NavLink} from "react-router-dom";
 import Menu from "@material-ui/core/Menu/Menu";
 import userPhoto from "../../../assets/imgs/user.png";
-import {withStyles} from "@material-ui/styles";
-import Pagination from "@material-ui/lab/Pagination/Pagination";
 
 const useStyles = makeStyles((theme) => ({
   inline: {
