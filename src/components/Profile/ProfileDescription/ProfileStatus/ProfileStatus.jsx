@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
   input: {
     fontWeight: 300
-  }
+  },
 });
 
 const ProfileStatus = ({isOwner, status, updateStatus}) => {
@@ -43,10 +43,10 @@ const ProfileStatus = ({isOwner, status, updateStatus}) => {
 
   return (
     <div>
-      {!editMode && <Tooltip title="Double click to edit" disableHoverListener={!isOwner}>
-        <span onDoubleClick={activateEditMode}>
-            {statusValue || isOwner && 'Добавить статус'}
-        </span>
+      {!editMode && <Tooltip title="Click to edit" disableHoverListener={!isOwner}>
+        <p onClick={activateEditMode}>
+            {statusValue || isOwner && 'Add status'}
+        </p>
       </Tooltip>}
       {editMode && <TextField
         InputProps={{ classes }} // remove underline

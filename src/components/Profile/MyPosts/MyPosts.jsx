@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/styles";
 import NewPostForm from "./NewPostForm/NewPostForm";
 import Post from "./Post/Post";
@@ -16,7 +15,6 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => 
   const classes = useStyles();
 
   const handleSubmitAddPostForm = (post) => {
-    debugger
     addPost(post);
     reset(newPostFormName)
   }

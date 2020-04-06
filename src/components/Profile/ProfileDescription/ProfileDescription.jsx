@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -68,10 +68,10 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
     }
 
     contactsElems = contactsElems.map((item, i) => {
-      return <>
-        <Link style={{textTransform: 'capitalize'}} key={item[0]} href={item[1]}>{item[0]}</Link>
+      return <Fragment key={item[0]}>
+        <Link style={{textTransform: 'capitalize'}} href={item[1]}>{item[0]}</Link>
         {i !== contactsElems.length - 1 && ' | '}
-      </>
+      </Fragment>
     })
 
     return contactsElems.length ? contactsElems : null;
@@ -104,9 +104,9 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
             <TableBody>
               {fieldsData.map((row, i) => {
                 return row ? <TableRow key={row.field}>
-                  <TableCell className={i === fieldsData.length - 1 && classes.tableCell} component="th"
+                  <TableCell className={i === fieldsData.length - 1 ? classes.tableCell : ''} component="th"
                              scope="row">{row.field}</TableCell>
-                  <TableCell className={i === fieldsData.length - 1 && classes.tableCell}
+                  <TableCell className={i === fieldsData.length - 1 ? classes.tableCell : ''}
                              align='left'>{row.value}</TableCell>
                 </TableRow> : null
               })}
