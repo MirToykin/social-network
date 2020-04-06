@@ -32,11 +32,10 @@ export const myTextarea = createFormElement('textarea', 'myTextarea');
 export const myInput = createFormElement('input', 'myInput')
 
 // -------------------for Material-UI-----------------------
-export const renderTextField = ({
+export const renderTextField = (custom) => ({
                                   label,
                                   input,
                                   meta: {touched, invalid, error},
-                                  ...custom
                                 }) => (
   <TextField
     fullWidth
@@ -49,8 +48,9 @@ export const renderTextField = ({
   />
 )
 
-export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true}});
+export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true}})
 
+export const renderPostTextarea = (handler) => (properties) => renderTextField({...properties, ...{multiline: true, autoFocus: true, placeholder: 'new post', onBlur: handler}});
 export const renderCheckbox = ({ input, label }) => (
   <div>
     <FormControlLabel

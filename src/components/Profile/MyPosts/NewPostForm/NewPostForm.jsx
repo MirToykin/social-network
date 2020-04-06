@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {reduxForm} from "redux-form";
 import {maxLength} from "../../../../helpers/validators";
-import {createField, renderTextarea, renderTextField} from "../../../common/FormElems/FormElems";
+import {createField, renderPostTextarea, renderTextarea, renderTextField} from "../../../common/FormElems/FormElems";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/styles";
 import defaultUserPhoto from "../../../../assets/imgs/user.png";
@@ -30,15 +30,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const NewPostForm = ({handleSubmit, pristine, submitting, avatar, authUser}) => {
+const NewPostForm = ({handleSubmit, pristine, submitting, avatar, authUser, renderTextarea, editMode, setEditMode}) => {
   const classes = useStyles();
-  const [editMode, setEditMode] = useState(false)
 
-  const handleBlur = (e) => {
-    if (!e.target.value) {
-      setEditMode(false);
-    }
-  }
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={1} alignItems="flex-end">
@@ -50,17 +44,7 @@ const NewPostForm = ({handleSubmit, pristine, submitting, avatar, authUser}) => 
         </Grid>
         <Grid item className={classes.inputContainer}>
           {editMode ?
-            createField(null, 'postText', null,
-              (properties) => (
-                renderTextField({
-                  ...properties, ...{
-                    multiline: true,
-                    // autoFocus: true,
-                    // onBlur: handleBlur,
-                    // placeholder: 'New post'
-                  }
-                })
-              )) :
+            createField(null, 'postText', null, renderTextarea) :
             <Typography onClick={() => setEditMode(true)}>New post</Typography>
           }
         </Grid>
