@@ -45,7 +45,7 @@ const setIsFetching = (isFetching) => {
   }
 }
 
-const setAuthUserProfile = (authUserProfile) => {
+export const setAuthUserProfile = (authUserProfile) => {
   return {
     type: SET_AUTH_USER_PROFILE,
     authUserProfile

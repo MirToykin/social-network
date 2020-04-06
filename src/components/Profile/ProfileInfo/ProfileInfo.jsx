@@ -4,8 +4,7 @@ import ProfilePhoto from "./ProfilePhoto/ProfliePhoto";
 import ProfileDescription from "./ProfielDescription/ProfileDescription";
 import Grid from "@material-ui/core/Grid";
 
-const ProfileInfo = ({userProfile, updateStatus, status, authId, savePhoto, saveProfileDescription}) => {
-  const isOwner = authId === userProfile.userId;
+const ProfileInfo = ({userProfile, updateStatus, status, authId, savePhoto, saveProfileDescription, isOwner}) => {
 
   return (
     <div className={classes.descriptionBlock}>

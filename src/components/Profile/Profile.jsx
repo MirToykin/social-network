@@ -1,9 +1,9 @@
 import React from 'react'
-import classes from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfoMUI";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
+  const isOwner = props.authId === props.userProfile.userId;
   return (
     <div>
       <ProfileInfo
@@ -13,6 +13,7 @@ const Profile = (props) => {
         authId={props.authId}
         savePhoto={props.savePhoto}
         saveProfileDescription={props.saveProfileDescription}
+        isOwner={isOwner}
       />
       <MyPostsContainer />
     </div>

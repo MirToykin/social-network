@@ -1,6 +1,9 @@
 import React from "react";
 import classes from './FormElems.module.css'
 import {Field} from "redux-form";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const createFormElement = (elemName, className) => ({input, type, meta: {touched, error}, ...props}) => {
   let isError = touched && error;
@@ -17,13 +20,47 @@ const createFormElement = (elemName, className) => ({input, type, meta: {touched
   )
 }
 
-export const createField = (placeholder, name, type, component, validators, label) => {
+export const createField = (label, name, type, component, validators, ...rest) => {
   return (
     <div>
-      <Field placeholder={placeholder} name={name} type={type} component={component} validate={validators}/> {label}
+      <Field label={label} name={name} type={type} component={component} validate={validators} {...rest}/>
     </div>
   )
 }
 
 export const myTextarea = createFormElement('textarea', 'myTextarea');
 export const myInput = createFormElement('input', 'myInput')
+
+// -------------------for Material-UI-----------------------
+export const renderTextField = ({
+                                  label,
+                                  input,
+                                  meta: {touched, invalid, error},
+                                  ...custom
+                                }) => (
+  <TextField style={{width: '100%'}}
+    label={label}
+    placeholder={label}
+    error={touched && invalid}
+    helperText={touched && error}
+    {...input}
+    {...custom}
+  />
+)
+
+export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true, rows: '3'}});
+
+export const renderCheckbox = ({ input, label }) => (
+  <div>
+    <FormControlLabel
+      control={
+        <Checkbox
+          color="primary"
+          checked={input.value ? true : false}
+          onChange={input.onChange}
+        />
+      }
+      label={label}
+    />
+  </div>
+)

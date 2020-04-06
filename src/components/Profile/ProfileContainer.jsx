@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import Profile from "./Profile";
+import Profile from "./ProfileMUI";
 import {connect} from "react-redux";
 import {
   getStatus,
@@ -24,8 +24,6 @@ function ProfileContainer(props) {
         }
       }
 
-      // props.getUserProfile(id);
-      // props.getStatus(id);
       if(props.authUserProfile && props.authUserProfile.userId === id) {
         props.setUserProfile(props.authUserProfile);
       } else {

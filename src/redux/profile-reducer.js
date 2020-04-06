@@ -1,4 +1,5 @@
 import api from "../api/api";
+import {setAuthUserProfile} from "./auth-reducer";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -110,6 +111,7 @@ export const savePhoto = (photoFile) => async (dispatch, getState) => {
         photos: response.data.photos
       }
       dispatch(saveProfileDataSuccess(userProfile));
+      dispatch(setAuthUserProfile(userProfile))
     }
   } catch (err) {
     console.log(err)
