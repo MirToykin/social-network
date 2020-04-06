@@ -1,24 +1,38 @@
-import React from 'react'
-import classes from './MyPosts.module.css'
-import Post from './Post/Post'
+import React from 'react';
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import {makeStyles} from "@material-ui/styles";
 import NewPostForm from "./NewPostForm/NewPostForm";
+import Post from "./Post/Post";
 
-const MyPosts = (props) => {
-  const handleSubmitAddPostForm = (post) => {
-    props.addPost(post);
-    props.reset(props.newPostFormName)
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2)
   }
-  return (
-    <div className={classes.myPosts}>
-      <h3>my posts</h3>
-      <div className={classes.newPost}>
-        <NewPostForm onSubmit={handleSubmitAddPostForm}/>
-      </div>
-      <div className={classes.posts}>
-        {props.posts.map((post) => <Post message={post.text} likeNum={post.likesCount} key={post.id}/>)}
-      </div>
-    </div>
-  )
-}
+}))
 
-export default MyPosts
+const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => {
+  const classes = useStyles();
+
+  const handleSubmitAddPostForm = (post) => {
+    debugger
+    addPost(post);
+    reset(newPostFormName)
+  }
+
+  return (
+    <>
+      <Paper className={classes.paper}>
+        <NewPostForm onSubmit={handleSubmitAddPostForm} avatar={avatar} authUser={authUser}/>
+      </Paper>
+      {posts.map((post) => (
+        <Paper className={classes.paper} key={post.id}>
+          <Post message={post.text} likeNum={post.likesCount}/>
+        </Paper>
+      ))}
+    </>
+  );
+};
+
+export default MyPosts;

@@ -1,13 +1,15 @@
 import React from 'react'
 import {addPost} from "../../../redux/profile-reducer";
-import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {reset} from 'redux-form';
+import MyPosts from "./MyPosts";
 
 const mapSateToProps = state => {
   return {
     posts: state.profile.postsData,
-    newPostFormName: state.profile.newPostFormName
+    newPostFormName: state.profile.newPostFormName,
+    avatar: state.auth.authUserProfile.photos.small,
+    authUser: state.auth.authUserProfile.fullName
   }
 }
 

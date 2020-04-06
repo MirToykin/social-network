@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import Profile from "./ProfileMUI";
+import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
   getStatus,

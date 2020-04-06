@@ -1,23 +1,27 @@
-import React from 'react'
-import ProfileInfo from "./ProfileInfo/ProfileInfoMUI";
+import React from 'react';
+import Grid from "@material-ui/core/Grid";
+import ProfilePhoto from "./profilePhoto/ProfilePhoto";
+import ProfileDescription from "./ProfileDescription/ProfileDescription";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
-  const isOwner = props.authId === props.userProfile.userId;
-  return (
-    <div>
-      <ProfileInfo
-        userProfile={props.userProfile}
-        updateStatus={props.updateStatus}
-        status={props.status}
-        authId={props.authId}
-        savePhoto={props.savePhoto}
-        saveProfileDescription={props.saveProfileDescription}
-        isOwner={isOwner}
-      />
-      <MyPostsContainer />
-    </div>
-  )
-}
+export default function Profile({userProfile, savePhoto, status, updateStatus, authId, saveProfileDescription}) {
+  const isOwner = authId === userProfile.userId;
 
-export default Profile
+  return (
+    <Grid container spacing={2} justify='center'>
+      <Grid item xs={3}>
+        <ProfilePhoto userProfile={userProfile} savePhoto={savePhoto} isOwner={isOwner}/>
+      </Grid>
+      <Grid item xs={6}>
+        <ProfileDescription
+          userProfile={userProfile}
+          updateStatus={updateStatus}
+          status={status}
+          isOwner={isOwner}
+          saveProfileDescription={saveProfileDescription}
+        />
+        <MyPostsContainer/>
+      </Grid>
+    </Grid>
+  );
+}

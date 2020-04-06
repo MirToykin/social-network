@@ -38,7 +38,8 @@ export const renderTextField = ({
                                   meta: {touched, invalid, error},
                                   ...custom
                                 }) => (
-  <TextField style={{width: '100%'}}
+  <TextField
+    fullWidth
     label={label}
     placeholder={label}
     error={touched && invalid}
@@ -48,7 +49,7 @@ export const renderTextField = ({
   />
 )
 
-export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true, rows: '3'}});
+export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true}});
 
 export const renderCheckbox = ({ input, label }) => (
   <div>

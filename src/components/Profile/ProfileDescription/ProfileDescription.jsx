@@ -15,17 +15,15 @@ import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
-import ProfileEditReduxForm from "../ProfileInfo/ProfielDescription/ProfileEditForm/ProfileEditForm";
+import ProfileEditReduxForm from "./EditProfileDescription/EditProfileDescription";
 
 const useStyles = makeStyles((theme) => ({
   status: {
     fontWeight: 300
   },
   paper: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
   divider: {
     backgroundColor: theme.palette.primary.main
