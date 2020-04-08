@@ -51,6 +51,8 @@ const ProfileStatus = ({isOwner, status, updateStatus}) => {
       {editMode && <TextField
         InputProps={{ classes }} // remove underline
         fullWidth
+        multiline
+        rowsMax={2}
         autoFocus={true}
         onBlur={deactivateEditMode}
         value={statusValue}

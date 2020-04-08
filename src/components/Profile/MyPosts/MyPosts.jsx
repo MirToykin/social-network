@@ -6,6 +6,11 @@ import Post from "./Post/Post";
 import {renderTextField} from "../../common/FormElems/FormElems";
 
 const useStyles = makeStyles(theme => ({
+  input: {
+    '&::placeholder': {
+      fontWeight: 200
+    }
+  },
   paper: {
     marginBottom: theme.spacing(2),
     padding: theme.spacing(2)
@@ -14,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => {
   const classes = useStyles();
+  posts = posts.reverse();
 
   const handleSubmitAddPostForm = (post) => {
     addPost(post);
@@ -28,7 +34,7 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => 
     * курсор перескакивает в начало инпута, при перенесении state и функции renderTextarea
     * поле ввода работает корректно
      */
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false);
 
   const handleBlur = (e) => {
     if (!e.target.value) {
@@ -40,7 +46,8 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => 
     multiline: true,
     autoFocus: true,
     onBlur: handleBlur,
-    placeholder: 'New post'
+    placeholder: 'New post',
+    inputProps: {className: classes.input}
   })
   //========================КОНЕЦ БЛОКА========================================
 
@@ -57,7 +64,11 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => 
       </Paper>
       {posts.map((post) => (
         <Paper className={classes.paper} key={post.id}>
-          <Post message={post.text} likeNum={post.likesCount}/>
+          <Post message={post.text}
+                likeNum={post.likesCount}
+                avatar={avatar}
+                authUser={authUser}
+          />
         </Paper>
       ))}
     </>

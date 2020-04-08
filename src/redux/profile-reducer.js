@@ -8,9 +8,9 @@ const SAVE_PROFILE_DATA_SUCCESS = 'SAVE_PROFILE_DATA_SUCCESS';
 
 let initialState = {
   postsData: [
-    {id: 1, text: 'This is my first post!', likesCount: 14},
-    {id: 2, text: 'Congratulations', likesCount: 10},
-    {id: 3, text: 'Thanks', likesCount: 11},
+    {id: 1, text: 'This is my first post!', likesCount: 14, date: 1586384418271},
+    {id: 2, text: 'Congratulations', likesCount: 10, date: 1586384633833},
+    {id: 3, text: 'Thanks', likesCount: 11, date: 1586385036150},
   ],
   userProfile: null,
   profileStatus: '',
@@ -23,7 +23,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         postValue: '',
-        postsData: [...state.postsData, {id: 5, text: action.post.postText, likesCount: 0}]
+        postsData: [...state.postsData, {id: Date.now(), text: action.post.postText, likesCount: 0, date: Date.now()}]
       }
     case SET_USER_PROFILE:
       return {

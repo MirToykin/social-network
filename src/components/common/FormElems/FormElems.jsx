@@ -48,9 +48,6 @@ export const renderTextField = (custom) => ({
   />
 )
 
-export const renderTextarea = (properties) => renderTextField({...properties, ...{multiline: true}})
-
-export const renderPostTextarea = (handler) => (properties) => renderTextField({...properties, ...{multiline: true, autoFocus: true, placeholder: 'new post', onBlur: handler}});
 export const renderCheckbox = ({ input, label }) => (
   <div>
     <FormControlLabel

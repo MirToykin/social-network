@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
   editProfile: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: '1.5rem' // like font size
   },
   dialog: {
     padding: theme.spacing(2)
@@ -98,7 +99,7 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
             updateStatus={updateStatus}
             status={status}
             isOwner={isOwner}/></Typography>
-        <Divider className={classes.divider}/>
+        {/*<Divider className={classes.divider}/>*/}
         <TableContainer component='div'>
           <Table>
             <TableBody>
