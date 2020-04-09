@@ -5,12 +5,13 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 const SAVE_PROFILE_DATA_SUCCESS = 'SAVE_PROFILE_DATA_SUCCESS';
+const CLICK_LIKE = 'CLICK_LIKE'
 
 let initialState = {
   postsData: [
-    {id: 1, text: 'This is my first post!', likesCount: 14, date: 1586384418271},
-    {id: 2, text: 'Congratulations', likesCount: 10, date: 1586384633833},
-    {id: 3, text: 'Thanks', likesCount: 11, date: 1586385036150},
+    {id: 1, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', likesCount: 14, date: 1586384418271, isLiked: false},
+    {id: 2, text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', likesCount: 10, date: 1586384633833, isLiked: false},
+    {id: 3, text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', likesCount: 11, date: 1586385036150, isLiked: false},
   ],
   userProfile: null,
   profileStatus: '',
@@ -23,7 +24,13 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         postValue: '',
-        postsData: [...state.postsData, {id: Date.now(), text: action.post.postText, likesCount: 0, date: Date.now()}]
+        postsData: [...state.postsData, {
+          id: Date.now(),
+          text: action.post.postText,
+          likesCount: 0,
+          date: Date.now(),
+          isLiked: false
+        }]
       }
     case SET_USER_PROFILE:
       return {
@@ -40,6 +47,20 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         userProfile: action.userProfile
       }
+    case CLICK_LIKE:
+      return {
+        ...state,
+        postsData: state.postsData.map(post => {
+          if (action.id === post.id) {
+            return {
+              ...post,
+              likesCount: post.isLiked ? post.likesCount - 1 : post.likesCount + 1,
+              isLiked: !post.isLiked
+            }
+          }
+          return post
+        })
+      }
     default:
       return state;
   }
@@ -49,6 +70,13 @@ export const addPost = (post) => {
   return {
     type: ADD_POST,
     post
+  }
+}
+
+export const clickLike = (id) => {
+  return {
+    type: CLICK_LIKE,
+    id
   }
 }
 

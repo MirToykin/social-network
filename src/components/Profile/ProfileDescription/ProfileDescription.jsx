@@ -70,7 +70,7 @@ const ProfileDescription = ({userProfile, updateStatus, status, isOwner, savePro
 
     contactsElems = contactsElems.map((item, i) => {
       return <Fragment key={item[0]}>
-        <Link style={{textTransform: 'capitalize'}} href={item[1]}>{item[0]}</Link>
+        <Link target='_blank' style={{textTransform: 'capitalize'}} href={item[1]}>{item[0]}</Link>
         {i !== contactsElems.length - 1 && ' | '}
       </Fragment>
     })

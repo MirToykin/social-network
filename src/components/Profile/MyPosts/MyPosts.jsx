@@ -17,9 +17,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => {
+const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser, clickLike}) => {
   const classes = useStyles();
-  posts = posts.reverse();
 
   const handleSubmitAddPostForm = (post) => {
     addPost(post);
@@ -68,6 +67,10 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser}) => 
                 likeNum={post.likesCount}
                 avatar={avatar}
                 authUser={authUser}
+                date={post.date}
+                clickLike={clickLike}
+                id={post.id}
+                isLiked={post.isLiked}
           />
         </Paper>
       ))}
