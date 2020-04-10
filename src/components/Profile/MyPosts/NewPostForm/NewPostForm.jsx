@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
   },
   typography: {
     cursor: 'text',
-    fontWeight: 200
+    fontWeight: 200,
+    fontSize: theme.spacing(1.75)
   }
 }))
 

@@ -6,7 +6,7 @@ import MyPosts from "./MyPosts";
 
 const mapSateToProps = state => {
   return {
-    posts: state.profile.postsData.sort((a, b) => a.date - b.date).reverse(),
+    posts: state.profile.postsData.sort((a, b) => b.date - a.date),
     newPostFormName: state.profile.newPostFormName,
     avatar: state.auth.authUserProfile.photos.small,
     authUser: state.auth.authUserProfile.fullName

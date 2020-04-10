@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
   input: {
     '&::placeholder': {
       fontWeight: 200
-    }
+    },
+    fontSize: theme.spacing(1.75)
   },
   paper: {
     marginBottom: theme.spacing(2),
@@ -41,13 +42,20 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser, clic
     }
   }
 
-  const renderTextarea = renderTextField({
+  // const renderTextarea = renderTextField({
+  //   multiline: true,
+  //   autoFocus: true,
+  //   onBlur: handleBlur,
+  //   placeholder: 'New post',
+  //   inputProps: {className: classes.input}
+  // })
+  const renderTextarea = (props) => renderTextField({...props, ...{
     multiline: true,
     autoFocus: true,
     onBlur: handleBlur,
     placeholder: 'New post',
     inputProps: {className: classes.input}
-  })
+  }})
   //========================КОНЕЦ БЛОКА========================================
 
   return (
