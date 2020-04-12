@@ -16,21 +16,21 @@ function ProfileContainer(props) {
   let id = props.match.params.userId;
 
   useEffect(() => {
-      if(!id) {
-        id = props.authId;
-        if(!id) {
-          props.history.push('/login')
-          return;
-        }
+    if (!id) {
+      id = props.authId;
+      if (!id) {
+        props.history.push('/login')
+        return;
       }
+    }
 
-      if(props.authUserProfile && props.authUserProfile.userId === id) {
-        props.setUserProfile(props.authUserProfile);
-      } else {
-        props.getUserProfile(id);
-      }
+    if (props.authUserProfile && props.authUserProfile.userId === id) {
+      props.setUserProfile(props.authUserProfile);
+    } else {
+      props.getUserProfile(id);
+    }
 
-      props.getStatus(id);
+    props.getStatus(id);
 
   }, [props.authId, id])
 
@@ -38,14 +38,16 @@ function ProfileContainer(props) {
     return <Preloader/>
   }
   return (
-    <Profile
-      userProfile={props.userProfile}
-      status={props.status}
-      updateStatus={props.updateStatus}
-      authId={props.authId}
-      savePhoto={props.savePhoto}
-      saveProfileDescription={props.saveProfileDescription}
-    />
+    <>
+      {props.authUserProfile ? <Profile
+        userProfile={props.userProfile}
+        status={props.status}
+        updateStatus={props.updateStatus}
+        authId={props.authId}
+        savePhoto={props.savePhoto}
+        saveProfileDescription={props.saveProfileDescription}
+      /> : <Preloader/>}
+    </>
   )
 }
 

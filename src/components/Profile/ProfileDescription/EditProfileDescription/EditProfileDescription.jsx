@@ -2,8 +2,8 @@ import React from 'react';
 import {reduxForm} from "redux-form";
 import {
   createField,
-  renderTextField,
-  renderCheckbox, renderTextarea
+  RenderTextField,
+  RenderCheckbox, RenderTextarea
 } from "../../../common/FormElems/FormElems";
 import {validURL, required} from "../../../../helpers/validators";
 import Grid from "@material-ui/core/Grid";
@@ -25,16 +25,16 @@ const EditProfileDescription = ({ handleSubmit, pristine, submitting, cancel }) 
     <form onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          {createField('Full name', 'fullName', 'text', renderTextField, [required])}
+          {createField('Full name', 'fullName', 'text', RenderTextField, [required])}
         </Grid>
         <Grid item xs={12}>
-          {createField('About me', 'aboutMe', 'text', renderTextarea)}
+          {createField('About me', 'aboutMe', 'text', RenderTextarea)}
         </Grid>
         <Grid item xs={12}>
-          {createField('Looking for a job', 'lookingForAJob', 'checkbox', renderCheckbox, null, 'Looking for a job ')}
+          {createField('Looking for a job', 'lookingForAJob', 'checkbox', RenderCheckbox, null, 'Looking for a job ')}
         </Grid>
         <Grid item xs={12}>
-          {createField('Professional skills', 'lookingForAJobDescription', 'text', renderTextarea)}
+          {createField('Professional skills', 'lookingForAJobDescription', 'text', RenderTextarea)}
         </Grid>
         {/*{['Facebook', 'Website', 'Vk', 'Instagram', 'Youtube', 'GitHub', 'MainLink'].map(contact => {*/}
         {/*  return createField(contact, `contacts.${contact}`, 'text', renderTextField, [validURL])*/}
@@ -42,25 +42,25 @@ const EditProfileDescription = ({ handleSubmit, pristine, submitting, cancel }) 
         {/*  return <Grid item xs={6}>{field}</Grid>*/}
         {/*})}   При динамическом выводе в поля не передаются инициализационные значения*/}
         <Grid item xs={6}>
-          {createField('Facebook', 'contacts.facebook', 'text', renderTextField, [validURL])}
+          {createField('Facebook', 'contacts.facebook', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('Website', 'contacts.website', 'text', renderTextField, [validURL])}
+          {createField('Website', 'contacts.website', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('Vk', 'contacts.vk', 'text', renderTextField, [validURL])}
+          {createField('Vk', 'contacts.vk', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('Instagram', 'contacts.instagram', 'text', renderTextField, [validURL])}
+          {createField('Instagram', 'contacts.instagram', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('Youtube', 'contacts.youtube', 'text', renderTextField, [validURL])}
+          {createField('Youtube', 'contacts.youtube', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('GitHub', 'contacts.github', 'text', renderTextField, [validURL])}
+          {createField('GitHub', 'contacts.github', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6}>
-          {createField('MainLink', 'contacts.mainLink', 'text', renderTextField, [validURL])}
+          {createField('MainLink', 'contacts.mainLink', 'text', RenderTextField, [validURL])}
         </Grid>
         <Grid item xs={6} className={classes.buttons}>
           <Button color='primary' type="submit">Save</Button>

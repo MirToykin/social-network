@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import withStyles from "@material-ui/core/styles/withStyles";
+import {makeStyles} from "@material-ui/styles";
 
 const createFormElement = (elemName, className) => ({input, type, meta: {touched, error}, ...props}) => {
   let isError = touched && error;
@@ -21,10 +22,10 @@ const createFormElement = (elemName, className) => ({input, type, meta: {touched
   )
 }
 
-export const createField = (label, name, type, component, validators, ...rest) => {
+export const createField = (label, name, type, component, validators, className) => {
   return (
-    <div>
-      <Field label={label} name={name} type={type} component={component} validate={validators} {...rest}/>
+    <div className={className ? className : null}>
+      <Field label={label} name={name} type={type} component={component} validate={validators}/>
     </div>
   )
 }
@@ -51,54 +52,51 @@ export const myInput = createFormElement('input', 'myInput')
 //   />
 // )
 
-export const renderTextField = ({
+const useStyles = makeStyles({
+  underline: {
+    "&::before": {
+      borderBottom: "1px solid #90caf9"
+    },
+    "&:hover:not(.Mui-disabled):before": {
+      borderBottom: "2px solid #90caf9"
+    },
+    "&::after": {
+      borderBottom: "2px solid #90caf9"
+    }
+  },
+  input: {
+    "&:-webkit-autofill": {
+      WebkitBoxShadow: "0 0 0 1000px #424242 inset",
+      WebkitTextFillColor: '#fff',
+      caretColor: '#fff'
+    }
+  }
+})
+
+export const RenderTextField = ({
                                   label,
                                   input,
                                   meta: {touched, invalid, error},
-                                  classes,
+                                  // classes,
                                   ...custom
-                                }) => (
-  <TextField
+                                }) => {
+  const classes = useStyles(); // styles for chrome autofill
+
+  return <TextField
     fullWidth
     label={label}
     placeholder={label}
     error={touched && invalid}
     helperText={touched && error}
-    InputProps={classes ? {classes: {input: classes.input, underline: classes.underline}} : null}
+    InputProps={{classes: {input: classes.input, underline: classes.underline}}}
     {...input}
     {...custom}
   />
-)
-
-export const renderTextarea = (props) => renderTextField({...props, ...{multiline: true}})
-
-export const renderAutofilledFields = (props) => {
-  const styles = {
-    underline: {
-      "&::before": {
-        borderBottom: "1px solid #90caf9"
-      },
-      "&:hover:not(.Mui-disabled):before": {
-        borderBottom: "2px solid #90caf9"
-      },
-      "&::after": {
-        borderBottom: "2px solid #90caf9"
-      }
-    },
-    input: {
-      "&:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 1000px #424242 inset",
-        WebkitTextFillColor: '#fff',
-        caretColor: '#fff'
-      }
-    }
-  };
-  const StyledField = withStyles(styles)(renderTextField);
-  return <StyledField {...props}/>
 }
 
+export const RenderTextarea = (props) => RenderTextField({...props, ...{multiline: true}})
 
-export const renderCheckbox = ({input, label}) => (
+export const RenderCheckbox = ({input, label}) => (
   <div>
     <FormControlLabel
       control={

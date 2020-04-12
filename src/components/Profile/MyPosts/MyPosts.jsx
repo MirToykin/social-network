@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/styles";
 import NewPostForm from "./NewPostForm/NewPostForm";
 import Post from "./Post/Post";
-import {renderTextField} from "../../common/FormElems/FormElems";
+import {RenderTextField} from "../../common/FormElems/FormElems";
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -49,7 +49,7 @@ const MyPosts = ({addPost, newPostFormName, reset, posts, avatar, authUser, clic
   //   placeholder: 'New post',
   //   inputProps: {className: classes.input}
   // })
-  const renderTextarea = (props) => renderTextField({...props, ...{
+  const renderTextarea = (props) => RenderTextField({...props, ...{
     multiline: true,
     autoFocus: true,
     onBlur: handleBlur,
